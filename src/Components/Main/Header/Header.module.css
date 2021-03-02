@@ -1,0 +1,9 @@
+.image {
+  position: relative;
+  border-style: dashed;
+  border-width: 2px;
+  border-color:blue;
+  height: 100%;
+  max-height: 500px;
+  min-height: 380px;
+}
