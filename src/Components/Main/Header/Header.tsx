@@ -1,11 +1,17 @@
 import {Background} from "./Background/Background";
-import React from "react";
+import React, {FC} from "react";
 import styles from './Header.module.css'
+import {Center_container} from "./Center_container/Center_container";
 
-export function Header () {
-    return(
-        <div className={styles.image}>
+interface IHeaderProps {
+    onSearch: (value: string) => void
+}
+
+export const Header: FC<IHeaderProps> = ({onSearch}) => {
+    return (
+        <header className={styles.hero}>
             <Background/>
-        </div>
+            <Center_container onSearch={onSearch}/>
+        </header>
     )
 }
