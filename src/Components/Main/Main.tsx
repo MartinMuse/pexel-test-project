@@ -31,7 +31,7 @@ export function Main() {
         setSearchFor(query);
         setPage(prevState => ++prevState);
         setTitle(query)
-        dispatch(getPhotos(page, query, () => setLoading(false), () => setLoading(false)))
+        dispatch(getPhotos(1, query, () => setLoading(false), () => setLoading(false)))
     }
 
     const infinitePhotoHandler = () => {
@@ -42,7 +42,7 @@ export function Main() {
         }
         else
         {
-            dispatch(getPhotos(page, searchFor, () => setLoading(false), () => setLoading(false)))
+            dispatch(getPhotos(page+1, searchFor, () => setLoading(false), () => setLoading(false)))
         }
     }
 
