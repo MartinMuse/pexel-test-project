@@ -1,11 +1,12 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {Header} from "./Header/Header";
-import styles from "./Main.module.css"
+import "./Main.css"
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../Redux/store";
-import {getPhotos, setError} from "../../Redux/actions/photoActions";
+import {getCuratedPhotos, getPhotos, setError} from "../../Redux/actions/photoActions";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
-
+import {Loader} from "../Loader/Loader";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export function Main() {
     const dispatch = useDispatch()
@@ -16,6 +17,11 @@ export function Main() {
     const [mode, setMode] = useState('trending')
     const [title, setTitle] = useState('Trending')
 
+    useEffect(() => {
+        dispatch(getCuratedPhotos(1, () => setLoading(false), () => setLoading(false)));
+    }, [dispatch]);
+
+
     const searchPhotosHandler = (query: string) => {
         if (error) {
             setError('')
@@ -23,16 +29,27 @@ export function Main() {
         setMode('search')
         setLoading(true);
         setSearchFor(query);
-        setPage(1);
-        dispatch(getPhotos(1, query, () => setLoading(false), () => setLoading(false)))
-
+        setPage(prevState => ++prevState);
+        setTitle(query)
+        dispatch(getPhotos(page, query, () => setLoading(false), () => setLoading(false)))
     }
+
+    const infinitePhotoHandler = () => {
+        setLoading(false)
+        setPage(prevState => prevState+1)
+        if (mode==='trending'){
+            dispatch(getCuratedPhotos(page+1, () => setLoading(false), () => setLoading(false)));
+        }
+        else
+        {
+            dispatch(getPhotos(page, searchFor, () => setLoading(false), () => setLoading(false)))
+        }
+    }
+
 
     let content = null
     if (loading) {
-        content = <div className={'is-flex is-justify-content-center py-6'}>
-            <div className={'loading'}>loading</div>
-        </div>
+        content=<Loader/>
     } else {
         content = (
             error
@@ -40,28 +57,34 @@ export function Main() {
                 : <Fragment>
                     <h2 className={'is-size-1 has-text-centered py-6'}>{title}</h2>
                     {photos.length > 0
-                        ? <ResponsiveMasonry columnsCountBreakPoint={{480: 2, 900: 3}}>
-                            <Masonry gutter={10}>
-                                {photos.map(photo => (
-                                    <div key={photo.id} className={'masonry-item'}>
-                                        <a href={'/#'} onClick={(e) => {
-                                        }}>
-                                            <img src={photo.src.large} alt={''}/>
-                                        </a>
-                                    </div>
-                                ))}
-                            </Masonry>
+                        ? <InfiniteScroll dataLength={photos.length}
+                                          next={infinitePhotoHandler}
+                                          hasMore={true}
+                                          loader={<Loader/>}>
+                            <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1200: 4}}>
+                                <Masonry gutter={10}>
+                                    {photos.map(photo => (
+                                        <div key={photo.id} className={'masonry-item'}>
+                                            <a href={'/#'} onClick={(e) => {
+                                            }}>
+                                                <img src={photo.src.large} alt={''}/>
+                                            </a>
+                                        </div>
+                                    ))}
+                                </Masonry>
+
                         </ResponsiveMasonry>
+                    </InfiniteScroll>
                         : <p className={'has-text-centered'}>No results</p>
                     }
                 </Fragment>
         )
     }
     return (
-        <div className={styles.main}>
+        <div className={'main'}>
             <Header onSearch={searchPhotosHandler}/>
-            <div className="container">
-                { content }
+            <div className={'l-container home-page'}>
+                {content}
             </div>
         </div>
     )

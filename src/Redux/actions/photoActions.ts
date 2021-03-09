@@ -14,7 +14,7 @@ export const getPhotos = (page: number, searchQuery: string,
             const photos: PhotosWithTotalResults | ErrorResponse = await client.photos.search({
                 page: page,
                 query: searchQuery,
-                per_page: 10
+                per_page: 28
             });
             if ("error" in photos) {
                 throw new Error(photos.error)
@@ -41,7 +41,7 @@ export const getCuratedPhotos=(page:number, onSuccess:()=>void,onError:()=>void)
     :ThunkAction<void, RootState, null, PhotosActions> =>{
     return async dispatch=>{
         try{
-            const photos: Photos|ErrorResponse=await client.photos.curated({page,per_page:10});
+            const photos: Photos|ErrorResponse=await client.photos.curated({page,per_page:28});
             if("error" in photos){
                 throw new Error(photos.error);
             }else {
