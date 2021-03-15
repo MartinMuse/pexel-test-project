@@ -133,3 +133,8 @@ button {
 .none{
   display:none
 }
+
+.search-bar--jumbo{
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+}

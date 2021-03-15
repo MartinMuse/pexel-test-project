@@ -1,0 +1,93 @@
+.hero__search-container__search-tags {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+ul.hero__search-container__search-tags__tag-container {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  list-style: none;
+  white-space: nowrap;
+  width: 100%;
+  margin: 0;
+  padding: .6rem 0;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+ul.hero__search-container__search-tags__tag-container li {
+  display: inline-block;
+}
+
+ul.hero__search-container__search-tags__tag-container>li:last-child {
+  margin-bottom: 1px;
+}
+
+ul.hero__search-container__search-tags__tag-container ul {
+  padding: 0;
+  margin: 0;
+}
+
+ul.hero__search-container__search-tags__tag-container .hero__search-container__search-tags__tag-container__tag:first-child {
+  margin-left: .6rem;
+}
+ul.hero__search-container__search-tags__tag-container .hero__search-container__search-tags__tag-container__tag {
+  display: block;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 0;
+  display: inline-block;
+  margin-right: 0.3rem;
+  opacity: .8;
+}
+
+ul.hero__search-container__search-tags__tag-container .hero__search-container__search-tags__tag-container__tag:last-child {
+  margin-right: .6rem;
+}
+
+ul ul {
+  list-style-type: circle;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+li {
+  text-align: -webkit-match-parent;
+}
+
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+ul.hero__search-container__search-tags__tag-container .hero__search-container__search-tags__tag-container__tag:not(:last-child):after {
+  content: ",";
+
+}
+
+ul.hero__search-container__search-tags__tag-container li a {
+  text-decoration: none;
+}
+ul.hero__search-container__search-tags__tag-container .hero__search-container__search-tags__tag-container__tag:hover {
+  opacity: 1;
+}
+
+a {
+  color: inherit;
+}
+
+a:-webkit-any-link {
+  cursor: pointer;
+}
+
+

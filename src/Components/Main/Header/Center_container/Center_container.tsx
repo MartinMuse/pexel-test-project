@@ -1,6 +1,7 @@
 import {SearchBar} from './SearchBar/SearchBar'
-import styles from './Center_container.module.css'
-import {FC, useState, Fragment} from "react";
+import  './Center_container.css'
+import {FC} from "react";
+import {SearchTags} from "./SearchTags/SearchTags";
 
 interface IHeaderProps {
     onSearch: (value: string) => void
@@ -8,12 +9,15 @@ interface IHeaderProps {
 
 export const Center_container: FC<IHeaderProps> = ({onSearch}) => {
     return (
-        <section className={styles.Center_container}>
-            <h1 className={styles.hero__title}>The best free stock photos &
+        <section className={'hero__content hero__content--centered'}>
+            <h1 className={'hero__title'}>The best free stock photos &
                 videos shared by talented creators.</h1>
-            <div>
-                <SearchBar onSearch={onSearch}/>
+            <div className="hero__search-container">
+                <SearchBar onSearch={onSearch} extraClass={'search-bar--jumbo'}/>
+                <SearchTags/>
             </div>
+
+
         </section>
     )
 }

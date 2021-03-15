@@ -1,6 +1,6 @@
 import {Background} from "./Background/Background";
 import React, {FC} from "react";
-import styles from './Header.module.css'
+import  './Header.css'
 import {Center_container} from "./Center_container/Center_container";
 
 interface IHeaderProps {
@@ -9,7 +9,7 @@ interface IHeaderProps {
 
 export const Header: FC<IHeaderProps> = ({onSearch}) => {
     return (
-        <header className={styles.hero}>
+        <header className={'hero'}>
             <Background/>
             <Center_container onSearch={onSearch}/>
         </header>

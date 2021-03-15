@@ -13,3 +13,12 @@ body {
   height: 100%;
   background-color: #fff;
 }
+
+html{
+  font-family: -apple-system,BlinkMacSystemFont,segoe ui,roboto,oxygen,cantarell,helvetica neue,ubuntu,sans-serif;
+  color: #1a1a1a;
+  font-size: 14px;
+  height: 100%;
+  margin: 0;
+  background-color: #fff;
+}

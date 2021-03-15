@@ -1,4 +1,4 @@
-import styles from './Background.module.css'
+import  './Background.css'
 import image from './pexels-image.jpg'
 import {createClient} from 'pexels';
 import {useEffect, useState} from "react";
@@ -17,7 +17,7 @@ export function Background() {
     }, [])
     if (background) {
         return (
-            <div className={styles.hero__background}>
+            <div className={'hero__background'}>
                 <img src={background.original}/>
             </div>
         )

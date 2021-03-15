@@ -4,10 +4,12 @@ import {FormEvent, useState, FC} from "react";
 interface ISearchBarProps {
     onSearch: (value: string) => void,
     placeHolder?: string,
-    activeClass?: string
+    activeClass?: string,
+    extraClass?: string,
 }
 
-export const SearchBar: FC<ISearchBarProps> = ({onSearch,activeClass='',placeHolder='Search for free photos and videos'}) => {
+export const SearchBar: FC<ISearchBarProps> = ({onSearch,activeClass='',
+                                                   placeHolder='Search for free photos and videos',extraClass=''}) => {
     const [search, setSearch] = useState('')
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();
@@ -15,7 +17,7 @@ export const SearchBar: FC<ISearchBarProps> = ({onSearch,activeClass='',placeHol
         setSearch('')
     }
     return (
-        <form className={'search-bar'} onSubmit={submitHandler}>
+        <form className={`search-bar`} onSubmit={submitHandler}>
             <div className={`search-bar__container ${activeClass}`}>
                 <input autoCapitalize="none" autoComplete="off" id="search" name="s"
                        placeholder={placeHolder}
@@ -25,6 +27,7 @@ export const SearchBar: FC<ISearchBarProps> = ({onSearch,activeClass='',placeHol
                        onChange={(e) => {
                            setSearch(e.currentTarget.value)
                        }}
+                       className={`${extraClass}`}
                 />
                 <button data-track-action="hero" data-track-label="searchicon" id="search-action" title="Search">
                     <i className="rd__svg-icon">
