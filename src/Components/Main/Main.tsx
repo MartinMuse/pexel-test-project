@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {FC, Fragment, useEffect, useState} from "react";
 import {Header} from "./Header/Header";
 import "./Main.css"
 import {useDispatch, useSelector} from "react-redux";
@@ -7,15 +7,17 @@ import {getCuratedPhotos, getPhotos, setError} from "../../Redux/actions/photoAc
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import {Loader} from "../Loader/Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
+import {Navbar} from "./Navbar/Navbar";
 
-export function Main() {
+
+export const Main: FC = () => {
     const dispatch = useDispatch()
     const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
     const [loading, setLoading] = useState(false);
     const [searchFor, setSearchFor] = useState('')
     const [page, setPage] = useState(1);
     const [mode, setMode] = useState('trending')
-    const [title, setTitle] = useState('Trending')
+    const [title, setTitle] = useState('Free Stock Photos')
 
     useEffect(() => {
         dispatch(getCuratedPhotos(1, () => setLoading(false), () => setLoading(false)));
@@ -35,21 +37,18 @@ export function Main() {
     }
 
     const infinitePhotoHandler = () => {
-        setLoading(false)
-        setPage(prevState => prevState+1)
-        if (mode==='trending'){
-            dispatch(getCuratedPhotos(page+1, () => setLoading(false), () => setLoading(false)));
-        }
-        else
-        {
-            dispatch(getPhotos(page+1, searchFor, () => setLoading(false), () => setLoading(false)))
+        setPage(prevState => prevState + 1)
+        if (mode === 'trending') {
+            dispatch(getCuratedPhotos(page + 1, () => setLoading(false), () => setLoading(false)));
+        } else {
+            dispatch(getPhotos(page + 1, searchFor, () => setLoading(false), () => setLoading(false)))
         }
     }
 
-
     let content = null
+
     if (loading) {
-        content=<Loader/>
+        content = <Loader/>
     } else {
         content = (
             error
@@ -62,7 +61,7 @@ export function Main() {
                                           hasMore={true}
                                           loader={<Loader/>}>
                             <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1200: 4}}>
-                                <Masonry gutter={10}>
+                                <Masonry gutter={10} className={'photos'}>
                                     {photos.map(photo => (
                                         <div key={photo.id} className={'masonry-item'}>
                                             <a href={'/#'} onClick={(e) => {
@@ -73,15 +72,18 @@ export function Main() {
                                     ))}
                                 </Masonry>
 
-                        </ResponsiveMasonry>
-                    </InfiniteScroll>
+                            </ResponsiveMasonry>
+                        </InfiniteScroll>
                         : <p className={'has-text-centered'}>No results</p>
                     }
                 </Fragment>
         )
     }
+
+
     return (
         <div className={'main'}>
+            <Navbar onSearch={searchPhotosHandler}/>
             <Header onSearch={searchPhotosHandler}/>
             <div className={'l-container home-page'}>
                 {content}

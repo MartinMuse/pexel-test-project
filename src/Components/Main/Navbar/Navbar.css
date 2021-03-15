@@ -1,0 +1,124 @@
+.main-nav-bar{
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 66px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 0 1.15rem;
+  z-index: 30;
+}
+
+.active_nav{
+  background: #232a34;
+}
+
+
+.main-nav-bar>*:not(:last-child) {
+  margin-right: 2.15rem;
+}
+
+.main-nav-bar__logo {
+  display: block;
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #fff;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  text-decoration: none;
+}
+.main-nav-bar__logo__img {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.main-nav-bar__logo__img svg {
+  border-radius: 8px;
+  height: 40px;
+  width: 40px;
+}
+
+.main-nav-bar__logo__text {
+  margin-left: 1rem;
+}
+
+.main-nav-bar__search-bar {
+  max-width: 750px;
+  width: 100%;
+}
+
+.search-bar {
+  position: relative;
+  z-index: 1;
+}
+
+.search-bar__container {
+  background: rgba(255,255,255,.95);
+  display: -webkit-box;
+  display: flex;
+  border: none;
+  border-radius: 6px;
+  z-index: 1;
+}
+
+.active_search{
+  display: flex;
+}
+
+.none{
+  display:none
+}
+
+
+
+
+
+.search-bar__container input {
+  display: block;
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 0;
+  -webkit-box-flex: 1;
+  flex: 1;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  background: transparent;
+  border: none;
+  color: #1a1a1a;
+  padding: .9rem 1.25rem;
+  width: 0;
+  z-index: 1;
+  font-weight: 300;
+  font-size: 17px;
+}
+
+.search-bar__container button {
+  border: none;
+  background: 0 0;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding: 0 1rem;
+  cursor: pointer;
+  z-index: 1;
+}

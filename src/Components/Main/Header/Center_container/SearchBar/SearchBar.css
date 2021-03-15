@@ -125,3 +125,11 @@ button {
   border-color: rgb(118, 118, 118);
   border-image: initial;
 }
+
+.active_search{
+  display: flex;
+}
+
+.none{
+  display:none
+}

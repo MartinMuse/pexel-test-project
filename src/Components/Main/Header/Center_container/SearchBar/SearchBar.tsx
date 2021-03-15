@@ -2,10 +2,12 @@ import './SearchBar.css'
 import {FormEvent, useState, FC} from "react";
 
 interface ISearchBarProps {
-    onSearch: (value: string) => void
+    onSearch: (value: string) => void,
+    placeHolder?: string,
+    activeClass?: string
 }
 
-export const SearchBar: FC<ISearchBarProps> = ({onSearch}) => {
+export const SearchBar: FC<ISearchBarProps> = ({onSearch,activeClass='',placeHolder='Search for free photos and videos'}) => {
     const [search, setSearch] = useState('')
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();
@@ -14,9 +16,9 @@ export const SearchBar: FC<ISearchBarProps> = ({onSearch}) => {
     }
     return (
         <form className={'search-bar'} onSubmit={submitHandler}>
-            <div className={'search-bar__container'}>
+            <div className={`search-bar__container ${activeClass}`}>
                 <input autoCapitalize="none" autoComplete="off" id="search" name="s"
-                       placeholder="Search for free photos and videos"
+                       placeholder={placeHolder}
                        required={true}
                        type="search"
                        value={search}
