@@ -8,6 +8,7 @@ import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import {Loader} from "../Loader/Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {Navbar} from "./Navbar/Navbar";
+import {PhotoItem} from "./Photo/PhotoItem";
 
 
 export const Main: FC = () => {
@@ -54,24 +55,20 @@ export const Main: FC = () => {
             error
                 ? <div className={'notification is-danger mt-6 has-text-centered'}>{error}</div>
                 : <Fragment>
-                    <h2 className={'is-size-1 has-text-centered py-6'}>{title}</h2>
+                    <div className="title-tabs">
+                        <div className="js-home-links-title title-tabs__title">{title}</div>
+                    </div>
                     {photos.length > 0
                         ? <InfiniteScroll dataLength={photos.length}
                                           next={infinitePhotoHandler}
                                           hasMore={true}
                                           loader={<Loader/>}>
-                            <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1200: 4}}>
-                                <Masonry gutter={10} className={'photos'}>
+                            <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2, 1400: 3, 1600: 4}}>
+                                <Masonry gutter={16} className={'photos'}>
                                     {photos.map(photo => (
-                                        <div key={photo.id} className={'masonry-item'}>
-                                            <a href={'/#'} onClick={(e) => {
-                                            }}>
-                                                <img src={photo.src.large} alt={''}/>
-                                            </a>
-                                        </div>
+                                        <PhotoItem photo={photo}/>
                                     ))}
                                 </Masonry>
-
                             </ResponsiveMasonry>
                         </InfiniteScroll>
                         : <p className={'has-text-centered'}>No results</p>

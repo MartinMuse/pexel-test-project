@@ -6,12 +6,32 @@
 
 .home-page {
   margin: auto;
-  /*max-width: 1400px;*/
+  max-width: 1400px;
   width:100%;
   min-height: 1500px;
   padding-left: 2rem;
   padding-right: 2rem;
 }
+.masonry-item{
+  width: 100%
+}
+.title-tabs {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: .5rem;
+}
 
-
+.title-tabs__title {
+  display: block;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 

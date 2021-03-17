@@ -4,8 +4,16 @@ import './SearchTags.css'
 const LIST_OF_TAGS = [
     'sheep', 'fish', 'love', 'sky',
     'flowers', 'ocean', 'summer', 'sunset',
-    'pets', 'woman', 'desert', 'france',
-    'israel', 'australia', 'horses', 'paris']
+    'pets', 'woman', 'desert', 'France',
+    'Israel', 'Australia', 'horses', 'Paris',
+    'rose', 'Belarus', 'rain', 'palm',
+    'winter', 'spring', 'beach', 'reading',
+    'butterfly','animal','snow','rock',
+    'car','mountain','forest','red',
+    'yellow', 'city', 'colors', 'tango',
+    'pray', 'nature', 'cute','landscape'
+]
+
 const MAX_SIZE = 7;
 
 export const SearchTags: FC = () => {
