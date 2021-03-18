@@ -217,11 +217,11 @@ button:focus{
   opacity: 1;
 }
 
-.rd__button--like.rd__button--like--active {
+.rd__button--like.rd__button--like--active--icon *{
   fill: #ff2121;
 }
 
-.rd__button--like--active .rd__button--like--active--icon {
+.rd__button--like--active .rd__button--like--active {
   display: block!important;
 }
 .rd__button--like--active {

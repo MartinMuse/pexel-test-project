@@ -9,6 +9,8 @@ import {Loader} from "../Loader/Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {Navbar} from "./Navbar/Navbar";
 import {PhotoItem} from "./Photo/PhotoItem";
+import {Modal} from "./Modal/Modal";
+import {Photo} from "pexels";
 
 
 export const Main: FC = () => {
@@ -19,6 +21,13 @@ export const Main: FC = () => {
     const [page, setPage] = useState(1);
     const [mode, setMode] = useState('trending')
     const [title, setTitle] = useState('Free Stock Photos')
+    const [showModal, setShowModal] = useState(false)
+    const [src, setSrc] = useState('')
+    const [authorUrl, setAuthorUrl] = useState('')
+    const [authorName, setAuthorName] = useState('')
+    const [likesCount, setLikesCount] = useState(0)
+    const [pictureId,setPictureId]=useState(0)
+
 
     useEffect(() => {
         dispatch(getCuratedPhotos(1, () => setLoading(false), () => setLoading(false)));
@@ -46,6 +55,25 @@ export const Main: FC = () => {
         }
     }
 
+    const modalCloseHandler = () => {
+        setSrc('');
+        setAuthorUrl('')
+        setAuthorName('')
+        setShowModal(false)
+        setPictureId(0)
+        document.body.style.overflow='auto'
+    }
+
+    const imageClickHandler = (e: MouseEvent, photo: Photo) => {
+        e.preventDefault()
+        setSrc(photo.src.large)
+        setAuthorUrl(photo.photographer_url)
+        setAuthorName(photo.photographer)
+        setPictureId(photo.id)
+        setShowModal(true)
+        document.body.style.overflow='hidden'
+    }
+
     let content = null
 
     if (loading) {
@@ -64,9 +92,9 @@ export const Main: FC = () => {
                                           hasMore={true}
                                           loader={<Loader/>}>
                             <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2, 1400: 3, 1600: 4}}>
-                                <Masonry gutter={16} className={'photos'}>
+                                <Masonry gutter={18} className={'photos'}>
                                     {photos.map(photo => (
-                                        <PhotoItem photo={photo}/>
+                                        <PhotoItem photo={photo} imageClickHandler={imageClickHandler}/>
                                     ))}
                                 </Masonry>
                             </ResponsiveMasonry>
@@ -85,6 +113,8 @@ export const Main: FC = () => {
             <div className={'l-container home-page'}>
                 {content}
             </div>
+            {showModal && <Modal src={src} authorName={authorName}
+                                 authorUrl={authorUrl} onClose={modalCloseHandler} pictureId={pictureId}/>}
         </div>
     )
 }

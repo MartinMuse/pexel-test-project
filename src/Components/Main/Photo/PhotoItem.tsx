@@ -6,11 +6,12 @@ import './PhotoItem.css'
 
 
 interface IPhotoItem {
-    photo: Photo
+    photo: Photo,
+    imageClickHandler:(e:any,photo:Photo)=>void,
 }
 
 
-export const PhotoItem: FC<IPhotoItem> = ({photo}) => {
+export const PhotoItem: FC<IPhotoItem> = ({photo,imageClickHandler}) => {
     const [isClicked,setIsClicked]=useState(false)
     //
     // const handleClick=(id)=>{
@@ -21,14 +22,15 @@ export const PhotoItem: FC<IPhotoItem> = ({photo}) => {
 
     return (<div key={photo.id} className={'masonry-item overlay'}>
                 <a href={'/#'} onClick={(e) => {}}>
-                    <img src={photo.src.large} alt={''} className={'masonry-item__img'}/>
+                    <img src={photo.src.large} alt={''} onClick={(e)=>imageClickHandler(e,photo)} className={'masonry-item__img'}/>
                 </a>
                 <a className={`masonry-item__photographer`} href="/#">
                     <span className="masonry-item__name">{photo.photographer}</span>
                 </a>
             <div className="masonry-item__info">
                 <button
-                    className="js-like js-like-6357726 rd__button rd__button--like rd__button--no-padding rd__button--text-white rd__button--with-icon"
+                    className={`js-like js-like-6357726 rd__button rd__button--like
+                     rd__button--no-padding rd__button--text-white rd__button--with-icon ${isClicked?'rd__button--like--active':''}`}
                     data-photo-id="6357726" data-initialized="true" onClick={()=>setIsClicked(prevState => !prevState)}>
                     <i className="rd__button--like--not-active--icon rd__svg-icon" style={isClicked?{display: 'none'}:{}} >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
