@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import './Navbar.css'
-import {SearchBar} from "../Header/Center_container/SearchBar/SearchBar";
+import {SearchBar} from "../Main/Header/Center_container/SearchBar/SearchBar";
 
 interface INavbarProps {
     onSearch: (value: string) => void

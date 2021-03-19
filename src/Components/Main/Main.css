@@ -1,8 +1,3 @@
-@media (min-width: 1900px) {
-  .home-page {
-    max-width: 1850px;
-  }
-}
 
 .home-page {
   margin: auto;
@@ -33,5 +28,11 @@
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+@media (min-width: 1900px) {
+  .home-page {
+    max-width: 1850px;
+  }
 }
 

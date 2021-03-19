@@ -4,78 +4,40 @@ import "./Main.css"
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../Redux/store";
 import {getCuratedPhotos, getPhotos, setError} from "../../Redux/actions/photoActions";
-import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import {Loader} from "../Loader/Loader";
-import InfiniteScroll from "react-infinite-scroll-component";
-import {Navbar} from "./Navbar/Navbar";
-import {PhotoItem} from "./Photo/PhotoItem";
-import {Modal} from "./Modal/Modal";
+import {Navbar} from "../Navbar/Navbar";
+import {Modal} from "../Modal/Modal";
 import {Photo} from "pexels";
+import {InfiniteScrollContainer} from "../InfiniteScrollContainer/InfiniteScrollContainer";
+
+interface IMainProps {
+    infinitePhotoHandler: () => void
+    searchPhotosHandler: (query: string) => void
+    modalCloseHandler: () => void
+    imageClickHandler: (e: MouseEvent, photo: Photo) => void
+    photos: Photo[]
+    title: string
+    error: any,
+    authorName: string,
+    src: string,
+    showModal: boolean,
+    authorUrl: string,
+    pictureId: number
+    likesCount: number
+    loading: boolean
+    setLoadingHandler: (value: boolean) => void
+}
 
 
-export const Main: FC = () => {
+export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler, modalCloseHandler,
+                                         imageClickHandler, photos, title, src, pictureId,
+                                         likesCount, showModal, authorUrl, authorName, error, loading,
+                                         setLoadingHandler}) => {
     const dispatch = useDispatch()
-    const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
-    const [loading, setLoading] = useState(false);
-    const [searchFor, setSearchFor] = useState('')
-    const [page, setPage] = useState(1);
-    const [mode, setMode] = useState('trending')
-    const [title, setTitle] = useState('Free Stock Photos')
-    const [showModal, setShowModal] = useState(false)
-    const [src, setSrc] = useState('')
-    const [authorUrl, setAuthorUrl] = useState('')
-    const [authorName, setAuthorName] = useState('')
-    const [likesCount, setLikesCount] = useState(0)
-    const [pictureId,setPictureId]=useState(0)
-
-
     useEffect(() => {
-        dispatch(getCuratedPhotos(1, () => setLoading(false), () => setLoading(false)));
+        dispatch(getCuratedPhotos(1, () => setLoadingHandler(false), () => setLoadingHandler(false)));
     }, [dispatch]);
-
-
-    const searchPhotosHandler = (query: string) => {
-        if (error) {
-            setError('')
-        }
-        setMode('search')
-        setLoading(true);
-        setSearchFor(query);
-        setPage(prevState => ++prevState);
-        setTitle(query)
-        dispatch(getPhotos(1, query, () => setLoading(false), () => setLoading(false)))
-    }
-
-    const infinitePhotoHandler = () => {
-        setPage(prevState => prevState + 1)
-        if (mode === 'trending') {
-            dispatch(getCuratedPhotos(page + 1, () => setLoading(false), () => setLoading(false)));
-        } else {
-            dispatch(getPhotos(page + 1, searchFor, () => setLoading(false), () => setLoading(false)))
-        }
-    }
-
-    const modalCloseHandler = () => {
-        setSrc('');
-        setAuthorUrl('')
-        setAuthorName('')
-        setShowModal(false)
-        setPictureId(0)
-        document.body.style.overflow='auto'
-    }
-
-    const imageClickHandler = (e: MouseEvent, photo: Photo) => {
-        e.preventDefault()
-        setSrc(photo.src.large)
-        setAuthorUrl(photo.photographer_url)
-        setAuthorName(photo.photographer)
-        setPictureId(photo.id)
-        setShowModal(true)
-        document.body.style.overflow='hidden'
-    }
-
     let content = null
-
     if (loading) {
         content = <Loader/>
     } else {
@@ -87,25 +49,13 @@ export const Main: FC = () => {
                         <div className="js-home-links-title title-tabs__title">{title}</div>
                     </div>
                     {photos.length > 0
-                        ? <InfiniteScroll dataLength={photos.length}
-                                          next={infinitePhotoHandler}
-                                          hasMore={true}
-                                          loader={<Loader/>}>
-                            <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2, 1400: 3, 1600: 4}}>
-                                <Masonry gutter={18} className={'photos'}>
-                                    {photos.map(photo => (
-                                        <PhotoItem photo={photo} imageClickHandler={imageClickHandler}/>
-                                    ))}
-                                </Masonry>
-                            </ResponsiveMasonry>
-                        </InfiniteScroll>
+                        ? <InfiniteScrollContainer imageClickHandler={imageClickHandler} loader={<Loader/>}
+                                                   photos={photos} hasMore={true} next={infinitePhotoHandler}/>
                         : <p className={'has-text-centered'}>No results</p>
                     }
                 </Fragment>
         )
     }
-
-
     return (
         <div className={'main'}>
             <Navbar onSearch={searchPhotosHandler}/>
@@ -117,4 +67,6 @@ export const Main: FC = () => {
                                  authorUrl={authorUrl} onClose={modalCloseHandler} pictureId={pictureId}/>}
         </div>
     )
+
 }
+

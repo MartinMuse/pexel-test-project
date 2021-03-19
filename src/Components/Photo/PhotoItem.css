@@ -81,7 +81,7 @@
   display: flex;
   bottom: 0;
   right: 0;
-  padding-bottom: 1rem;
+  padding-bottom: 0.85rem;
   padding-right: 1.15rem;
   color: #fff;
 }
@@ -217,14 +217,15 @@ button:focus{
   opacity: 1;
 }
 
-.rd__button--like.rd__button--like--active--icon *{
-  fill: #ff2121;
+.rd__button--like.rd__button--like--active--icon svg{
+  fill: #ff2121!important;
 }
 
 .rd__button--like--active .rd__button--like--active {
   display: block!important;
 }
-.rd__button--like--active {
-  color: #ff2121;
-  outline: none;
+
+
+.rd__button--like--active--icon svg {
+  fill: #ff2121!important;
 }

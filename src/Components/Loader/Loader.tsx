@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styled from 'styled-components';
 
 const Loading = styled.div`
@@ -60,7 +60,7 @@ text-align: center;
 }
 `;
 
-export const Loader = () => {
+export const Loader:FC = () => {
     return (
         <Loading>
             <div className="lds-ellipsis">
