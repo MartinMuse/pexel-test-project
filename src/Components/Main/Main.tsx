@@ -9,31 +9,25 @@ import {Navbar} from "../Navbar/Navbar";
 import {Modal} from "../Modal/Modal";
 import {Photo} from "pexels";
 import {InfiniteScrollContainer} from "../InfiniteScrollContainer/InfiniteScrollContainer";
+import {IPictureInf} from "../App";
 
 interface IMainProps {
     infinitePhotoHandler: () => void
     searchPhotosHandler: (query: string) => void
     modalCloseHandler: () => void
     imageClickHandler: (e: MouseEvent, photo: Photo) => void
-    photos: Photo[]
-    title: string
-    error: any,
-    authorName: string,
-    src: string,
     showModal: boolean,
-    authorUrl: string,
-    pictureId: number
-    likesCount: number
     loading: boolean
     setLoadingHandler: (value: boolean) => void
+    pictureInf: IPictureInf
 }
 
 
-export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler, modalCloseHandler,
-                                         imageClickHandler, photos, title, src, pictureId,
-                                         likesCount, showModal, authorUrl, authorName, error, loading,
-                                         setLoadingHandler}) => {
+export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler,
+                                         modalCloseHandler, imageClickHandler, showModal, loading, setLoadingHandler,pictureInf}) => {
+    const title='Free Stock Photos'
     const dispatch = useDispatch()
+    const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
     useEffect(() => {
         dispatch(getCuratedPhotos(1, () => setLoadingHandler(false), () => setLoadingHandler(false)));
     }, [dispatch]);
@@ -63,8 +57,8 @@ export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler,
             <div className={'l-container home-page'}>
                 {content}
             </div>
-            {showModal && <Modal src={src} authorName={authorName}
-                                 authorUrl={authorUrl} onClose={modalCloseHandler} pictureId={pictureId}/>}
+            {showModal && <Modal src={pictureInf.src} authorName={pictureInf.authorName}
+                                 authorUrl={pictureInf.authorUrl} onClose={modalCloseHandler} pictureId={pictureInf.pictureId}/>}
         </div>
     )
 

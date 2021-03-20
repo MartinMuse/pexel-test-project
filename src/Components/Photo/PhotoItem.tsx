@@ -24,7 +24,7 @@ export const PhotoItem: FC<IPhotoItem> = ({photo,imageClickHandler}) => {
                 <a href={'/#'} onClick={(e) => {}}>
                     <img src={photo.src.large} alt={''} onClick={(e)=>imageClickHandler(e,photo)} className={'masonry-item__img'}/>
                 </a>
-                <a className={`masonry-item__photographer`} href="/#">
+                <a className={`masonry-item__photographer`} href={photo.photographer_url} target="_blank">
                     <span className="masonry-item__name">{photo.photographer}</span>
                 </a>
             <div className="masonry-item__info">

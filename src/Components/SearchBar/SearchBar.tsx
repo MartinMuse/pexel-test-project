@@ -1,5 +1,6 @@
 import './SearchBar.css'
 import {FormEvent, useState, FC} from "react";
+import {useHistory} from "react-router";
 
 interface ISearchBarProps {
     onSearch: (value: string) => void,
@@ -8,8 +9,7 @@ interface ISearchBarProps {
     extraClass?: string,
 }
 
-export const SearchBar: FC<ISearchBarProps> = ({onSearch,activeClass='',
-                                                   placeHolder='Search for free photos and videos',extraClass=''}) => {
+export const SearchBar: FC<ISearchBarProps> = ({onSearch, activeClass = '', placeHolder = 'Search for free photos and videos', extraClass = ''}) => {
     const [search, setSearch] = useState('')
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();
@@ -20,15 +20,11 @@ export const SearchBar: FC<ISearchBarProps> = ({onSearch,activeClass='',
         <form className={`search-bar`} onSubmit={submitHandler}>
             <div className={`search-bar__container ${activeClass}`}>
                 <input autoCapitalize="none" autoComplete="off" id="search" name="s"
-                       placeholder={placeHolder}
-                       required={true}
-                       type="search"
-                       value={search}
+                       placeholder={placeHolder} required={true} type="search" value={search}
                        onChange={(e) => {
                            setSearch(e.currentTarget.value)
                        }}
-                       className={`${extraClass}`}
-                />
+                       className={`${extraClass}`}/>
                 <button data-track-action="hero" data-track-label="searchicon" id="search-action" title="Search">
                     <i className="rd__svg-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

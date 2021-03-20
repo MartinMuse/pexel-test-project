@@ -75,19 +75,24 @@ ul.hero__search-container__search-tags__tag-container .hero__search-container__s
 
 }
 
-ul.hero__search-container__search-tags__tag-container li a {
+ul.hero__search-container__search-tags__tag-container li .js-popular-search-tag {
   text-decoration: none;
 }
 ul.hero__search-container__search-tags__tag-container .hero__search-container__search-tags__tag-container__tag:hover {
   opacity: 1;
 }
 
-a {
+.js-popular-search-tag {
   color: inherit;
 }
 
-a:-webkit-any-link {
+.js-popular-search-tag {
   cursor: pointer;
 }
 
+a{
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
 

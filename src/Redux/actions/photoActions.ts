@@ -4,7 +4,7 @@ import {ThunkAction} from "redux-thunk";
 import {RootState} from "../store";
 import {GET_PHOTOS, PhotosActions, SET_ERROR} from "../types";
 
-const client = createClient('563492ad6f91700001000001f3da6c8357e54f0489449c8eea658713')
+const client = createClient('563492ad6f91700001000001b51076f5275b4acf85e7bbb56e355012')
 
 export const getPhotos = (page: number, searchQuery: string,
                           onSuccess: () => void, onError: () => void)

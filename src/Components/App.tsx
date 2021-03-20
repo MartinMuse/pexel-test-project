@@ -1,26 +1,35 @@
 import React, {FC, useEffect, useState} from 'react';
 import './App.css';
 import {Main} from './Main/Main'
-import {Route, Redirect} from 'react-router';
+import {Route, Redirect, useHistory} from 'react-router';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../Redux/store";
 import {getCuratedPhotos, getPhotos, setError} from "../Redux/actions/photoActions";
 import {Photo} from "pexels";
+import {SearchPage} from "./SearchPage/SearchPage";
+
+ export interface IPictureInf{
+     src:string
+     authorUrl:string
+     authorName:string
+     pictureId:number
+ }
 
 const App: FC = () => {
     const dispatch = useDispatch()
-    const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
+    const history = useHistory()
     const [searchFor, setSearchFor] = useState('')
     const [page, setPage] = useState(1);
     const [mode, setMode] = useState('trending')
-    const [title, setTitle] = useState('Free Stock Photos')
     const [showModal, setShowModal] = useState(false)
-    const [src, setSrc] = useState('')
-    const [authorUrl, setAuthorUrl] = useState('')
-    const [authorName, setAuthorName] = useState('')
-    const [likesCount, setLikesCount] = useState(0)
-    const [pictureId, setPictureId] = useState(0)
     const [loading, setLoading] = useState(false);
+    const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
+    const [pictureInf,setPictureInf]=useState<IPictureInf>({
+        src:'',
+        authorUrl:'',
+        authorName:'',
+        pictureId:0
+    })
 
     const searchPhotosHandler = (query: string) => {
         if (error) {
@@ -30,8 +39,8 @@ const App: FC = () => {
         setLoading(true);
         setSearchFor(query);
         setPage(prevState => ++prevState);
-        setTitle(query)
         dispatch(getPhotos(1, query, () => setLoading(false), () => setLoading(false)))
+        history.push(`/search/${query}`)
     }
 
     const infinitePhotoHandler = () => {
@@ -44,11 +53,13 @@ const App: FC = () => {
     }
 
     const modalCloseHandler = () => {
-        setSrc('');
-        setAuthorUrl('')
-        setAuthorName('')
         setShowModal(false)
-        setPictureId(0)
+        setPictureInf({
+            src:'',
+            authorUrl:'',
+            authorName:'',
+            pictureId:0
+        })
         document.body.style.overflow = 'auto'
     }
 
@@ -58,10 +69,12 @@ const App: FC = () => {
 
     const imageClickHandler = (e: MouseEvent, photo: Photo) => {
         e.preventDefault()
-        setSrc(photo.src.large)
-        setAuthorUrl(photo.photographer_url)
-        setAuthorName(photo.photographer)
-        setPictureId(photo.id)
+        setPictureInf({
+            src:photo.src.large,
+            authorUrl:photo.photographer_url,
+            authorName:photo.photographer,
+            pictureId:photo.id
+        })
         setShowModal(true)
         document.body.style.overflow = 'hidden'
     }
@@ -71,14 +84,21 @@ const App: FC = () => {
             <Route exact path={'/'}>
                 <Redirect to="/main"/>
             </Route>
-            <Route exact path={'/main'} render={() => <Main photos={photos} imageClickHandler={imageClickHandler}
+            <Route exact path={'/main'} render={() => <Main imageClickHandler={imageClickHandler}
                                                             infinitePhotoHandler={infinitePhotoHandler}
-                                                            pictureId={pictureId} authorUrl={authorUrl}
-                                                            authorName={authorName} src={src} error={error} likesCount={likesCount}
                                                             modalCloseHandler={modalCloseHandler}
                                                             searchPhotosHandler={searchPhotosHandler}
-                                                            showModal={showModal} title={title} loading={loading}
-                                                            setLoadingHandler={setLoadingHandler}/>}/>
+                                                            setLoadingHandler={setLoadingHandler}
+                                                            showModal={showModal} loading={loading} pictureInf={pictureInf}/>}/>
+
+            <Route path={'/search'} render={()=><SearchPage  imageClickHandler={imageClickHandler}
+                                                             infinitePhotoHandler={infinitePhotoHandler}
+                                                             modalCloseHandler={modalCloseHandler}
+                                                             searchPhotosHandler={searchPhotosHandler}
+                                                             setLoadingHandler={setLoadingHandler}
+                                                             showModal={showModal} loading={loading} pictureInf={pictureInf}
+                                                             search={searchFor}
+            />}/>
 
         </div>
     );

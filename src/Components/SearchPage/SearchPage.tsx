@@ -1,39 +1,62 @@
-import React, {FC, useState} from "react";
+import React, {FC, Fragment, useState} from "react";
 import {Navbar} from "../Navbar/Navbar";
 import {Header} from "../Main/Header/Header";
 import {Modal} from "../Modal/Modal";
+import {Photo} from "pexels";
+import {IPictureInf} from "../App";
+import {Loader} from "../Loader/Loader";
+import './SearchPage.css'
+import {InfiniteScrollContainer} from "../InfiniteScrollContainer/InfiniteScrollContainer";
+import {useSelector} from "react-redux";
+import {RootState} from "../../Redux/store";
 
-interface ISearchPageProps{
-    onSearch:()=>void,
+interface ISearchPageProps {
+    infinitePhotoHandler: () => void
+    searchPhotosHandler: (query: string) => void
+    modalCloseHandler: () => void
+    imageClickHandler: (e: MouseEvent, photo: Photo) => void
+    showModal: boolean,
+    loading: boolean
+    setLoadingHandler: (value: boolean) => void
+    pictureInf: IPictureInf,
+    search: string
 }
 
-export const SearchPage:FC=()=>{
-    const [showModal, setShowModal] = useState(false)
-    const [src, setSrc] = useState('')
-    const [authorUrl, setAuthorUrl] = useState('')
-    const [authorName, setAuthorName] = useState('')
-    const [likesCount, setLikesCount] = useState(0)
-    const [pictureId,setPictureId]=useState(0)
+export const SearchPage: FC<ISearchPageProps> = ({searchPhotosHandler, infinitePhotoHandler, modalCloseHandler, imageClickHandler,
+                                                     showModal, loading, pictureInf, search}) => {
 
-    const modalCloseHandler = () => {
-        setSrc('');
-        setAuthorUrl('')
-        setAuthorName('')
-        setShowModal(false)
-        setPictureId(0)
-        document.body.style.overflow='auto'
+    const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
+    let content = null
+    if (loading) {
+        content = <Loader/>
+    }else{
+         content = (
+            error
+                ? <div className={'notification is-danger mt-6 has-text-centered'}>{error}</div>
+                : <Fragment>
+                    <section className="search__header">
+                        <h1 className="search__header__title">{search}</h1>
+                    </section>
+                    <div className={'search__grid'}>
+                        {photos.length > 0
+                            ? <InfiniteScrollContainer imageClickHandler={imageClickHandler} loader={<Loader/>}
+                                                       photos={photos} hasMore={true} next={infinitePhotoHandler}/>
+                            : <p className={'has-text-centered'}>No results</p>
+                        }
+                    </div>
+                </Fragment>
+        )
     }
-
-
-
-    return(
-        <div className={'main'}>
-            {/*<Navbar onSearch={searchPhotosHandler}/>*/}
-            <div className={'l-container home-page'}>
-
+    return (
+        <div className={'page-wrap'}>
+            <Navbar onSearch={searchPhotosHandler} isAlwaysActive={true}/>
+            <div className="main-nav-bar-padding"></div>
+            <div className={'search'}>
+                {content}
             </div>
-            {showModal && <Modal src={src} authorName={authorName}
-                                 authorUrl={authorUrl} onClose={modalCloseHandler} pictureId={pictureId}/>}
+            {showModal && <Modal src={pictureInf.src} authorName={pictureInf.authorName}
+                                 authorUrl={pictureInf.authorUrl} onClose={modalCloseHandler}
+                                 pictureId={pictureInf.pictureId}/>}
         </div>
     )
 }

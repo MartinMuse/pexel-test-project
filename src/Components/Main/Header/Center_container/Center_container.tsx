@@ -1,4 +1,4 @@
-import {SearchBar} from './SearchBar/SearchBar'
+import {SearchBar} from '../../../SearchBar/SearchBar'
 import  './Center_container.css'
 import {FC} from "react";
 import {SearchTags} from "./SearchTags/SearchTags";
@@ -14,7 +14,7 @@ export const Center_container: FC<IHeaderProps> = ({onSearch}) => {
                 videos shared by talented creators.</h1>
             <div className="hero__search-container">
                 <SearchBar onSearch={onSearch} extraClass={'search-bar--jumbo'}/>
-                <SearchTags/>
+                <SearchTags onSearch={onSearch}/>
             </div>
 
 

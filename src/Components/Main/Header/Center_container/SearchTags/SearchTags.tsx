@@ -14,9 +14,13 @@ const LIST_OF_TAGS = [
     'pray', 'nature', 'cute','landscape'
 ]
 
+interface ISearchTags{
+    onSearch:(q:string)=>void
+}
+
 const MAX_SIZE = 7;
 
-export const SearchTags: FC = () => {
+export const SearchTags: FC<ISearchTags> = ({onSearch}) => {
 
     const randomElement = (arr: Array<string>): string => {
         const random = Math.floor(Math.random() * arr.length);
@@ -30,14 +34,16 @@ export const SearchTags: FC = () => {
         }
         return result
     }
-
+    const onClickHandler=(search:string)=>{
+        onSearch(search)
+    }
     const createTagsList = (): any => {
         const tagsSet = createTagsSet();
         const result = [];
         for (let tag of tagsSet) {
             result.push(
-                <li className="hero__search-container__search-tags__tag-container__tag">
-                    <a className="js-popular-search-tag" href="/#">{tag}</a>
+                <li className="hero__search-container__search-tags__tag-container__tag" onClick={()=>onClickHandler(tag)}>
+                    <span className="js-popular-search-tag">{tag}</span>
                 </li>
             )
         }
