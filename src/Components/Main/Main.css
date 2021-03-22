@@ -36,3 +36,10 @@
   }
 }
 
+@media (max-width: 849px){
+  .home-page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+

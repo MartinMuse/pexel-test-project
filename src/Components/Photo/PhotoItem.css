@@ -47,7 +47,7 @@
   box-sizing: content-box;
   max-width: calc(100% - 40px);
   margin-right: 40px;
-  margin-left: 5px;
+  margin-left: 8px;
   display: inline-block;
   vertical-align: middle;
   text-overflow: ellipsis;
@@ -81,17 +81,17 @@
   display: flex;
   bottom: 0;
   right: 0;
-  padding-bottom: 0.85rem;
+  padding-bottom: 1.15rem;
   padding-right: 1.15rem;
   color: #fff;
 }
 
-.masonry-item:hover .masonry-item .js-collect, .masonry-item:hover .masonry-item .js-like, .masonry-item:hover .masonry-item__info .js-download {
+.masonry-item:hover .masonry-item .js-like, .masonry-item:hover .masonry-item__info .js-download, .masonry-item:hover .masonry-item__info .js-collect {
   opacity: .8;
   width: 40px;
-  -webkit-transition-delay: .1s;
   transition-delay: .1s;
 }
+
 
 .masonry-item .js-collect, .masonry-item .js-like, .masonry-item .js-download {
   z-index: 2;
@@ -228,4 +228,17 @@ button:focus{
 
 .rd__button--like--active--icon svg {
   fill: #ff2121!important;
+}
+.photo-item__avatar {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  text-indent: -9999px;
+  z-index: 2;
+}
+a img {
+  border: 0;
+}
+img {
+  max-width: 100%;
 }

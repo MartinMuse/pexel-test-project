@@ -1,6 +1,7 @@
 .rd__modal--open {
   visibility: visible;
 }
+
 /*.rd__modal {*/
 /*  visibility: hidden;*/
 /*}*/
@@ -9,6 +10,7 @@
   -webkit-transform: none;
   transform: none;
 }
+
 /*.rd__modal .rd__modal__overlay {*/
 /*  -webkit-transform: translateX(200vw);*/
 /*  transform: translateX(200vw);*/
@@ -27,7 +29,7 @@
   flex-direction: column;
   -webkit-box-align: center;
   align-items: center;
-  background-color: rgba(12,15,19,.9);
+  background-color: rgba(12, 15, 19, .9);
   /*overflow-y: auto;*/
   -webkit-overflow-scrolling: touch;
   z-index: 109;
@@ -36,32 +38,39 @@
 .rd__modal__exit, .rd__modal__content__forward-button, .rd__modal__content__back-button {
   opacity: .6;
 }
+
 .rd__modal__exit {
-  position: fixed!important;
+  position: fixed !important;
   top: 1.15rem;
   left: 1.15rem;
 }
+
 .rd__button--circle-icon {
   padding: 0;
   width: 40px;
   height: 40px;
   border-radius: 50%;
 }
+
 .rd__button--text-white {
   background: 0 0;
   color: #fff;
   border-color: transparent;
   box-shadow: none;
 }
-@media not screen and (-webkit-min-device-pixel-ratio: 2), not all, not screen and (min-resolution: 192dpi), not screen and (min-resolution: 2dppx)
-{.rd__button {
+
+@media not screen and (-webkit-min-device-pixel-ratio: 2), not all, not screen and (min-resolution: 192dpi), not screen and (min-resolution: 2dppx) {
+  .rd__button {
     font-weight: 300;
-  }}
+  }
+}
+
 input, button, select, textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
+
 .rd__modal__content {
   position: absolute;
   max-width: 1200px;
@@ -85,6 +94,7 @@ input, button, select, textarea {
   background-size: contain;
   font-style: normal;
 }
+
 .photo-page {
   display: -webkit-box;
   display: flex;
@@ -92,20 +102,24 @@ input, button, select, textarea {
   -webkit-box-direction: normal;
   flex-direction: column;
   padding-bottom: 1.75rem;
-  min-height: 75vh;
+  min-height: 50vh;
   max-height: 90vh;
 }
+
 .photo-page__section--action-bar {
   margin-bottom: 35px;
   padding: 0;
 }
+
 .photo-page__section {
   position: relative;
   padding: 0 5px;
 }
+
 section {
   display: block;
 }
+
 .level {
   display: -webkit-box;
   display: flex;
@@ -130,6 +144,7 @@ section {
   flex-grow: 0;
   flex-shrink: 0;
 }
+
 .level__item {
   display: -webkit-box;
   display: flex;
@@ -142,10 +157,12 @@ section {
   flex-grow: 0;
   flex-shrink: 0;
 }
+
 .level__item * {
   margin-top: 0;
   margin-bottom: 0;
 }
+
 .photo-page__mini-profile {
   display: -webkit-box;
   display: flex;
@@ -154,9 +171,11 @@ section {
   text-decoration: none;
   margin-right: 20px;
 }
+
 .photo-page__mini-profile__text {
   max-width: 250px;
 }
+
 .photo-page__mini-profile__text__title {
   display: block;
   font-size: 16px;
@@ -167,11 +186,12 @@ section {
   text-align: left;
 }
 
-.photo-page__mini-profile__text>* {
+.photo-page__mini-profile__text > * {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .level__right {
   -webkit-box-align: center;
   align-items: center;
@@ -182,32 +202,38 @@ section {
 .photo-page__action-buttons {
   margin-left: .6rem;
 }
-.rd__button-group .rd__dropdown>.rd__button:not(:last-child), .rd__button-group>*:not(.rd__dropdown):not(:last-child) {
+
+.rd__button-group .rd__dropdown > .rd__button:not(:last-child), .rd__button-group > *:not(.rd__dropdown):not(:last-child) {
   margin-right: .6rem;
 }
 
 .rd__button--with-icon, .rd__button--with-icon-right, .rd__button--with-icon-left {
-  padding-top: .6rem;
-  padding-bottom: .6rem;
+  padding-top: .6rem!important;
+  padding-bottom: .6rem!important;
 }
+
 .rd__button--white {
   background: #fff;
-  color: #1a1a1a!important;
-  border-color: rgba(26,26,26,.15);
+  color: #1a1a1a !important;
+  border-color: rgba(26, 26, 26, .15);
 }
-@media not screen and (-webkit-min-device-pixel-ratio: 2), not all, not screen and (min-resolution: 192dpi), not screen and (min-resolution: 2dppx)
-{.rd__button {
+
+@media not screen and (-webkit-min-device-pixel-ratio: 2), not all, not screen and (min-resolution: 192dpi), not screen and (min-resolution: 2dppx) {
+  .rd__button {
     font-weight: 300;
-  }}
+  }
+}
 
 
 .rd__button--with-icon-left .rd__svg-icon {
   margin-right: 6px;
 }
+
 .rd__button--with-icon .rd__svg-icon, .rd__button--with-icon-right .rd__svg-icon, .rd__button--with-icon-left .rd__svg-icon {
   width: 24px;
   height: 24px;
 }
+
 .rd__button--white .rd__svg-icon, .rd__button--white .rd__icon, .rd__button--text .rd__svg-icon, .rd__button--text .rd__icon, .rd__button--text-primary .rd__svg-icon, .rd__button--text-primary .rd__icon, .rd__button--text-secondary .rd__svg-icon, .rd__button--text-secondary .rd__icon {
   opacity: .95;
 }
@@ -216,78 +242,176 @@ section {
   height: 100%;
   width: 100%;
 }
+
 .rd__button-group--bar {
   box-shadow: 0 1px 1px 0 rgb(0 0 5%);
 }
+
 .rd__button-group {
   display: -webkit-box;
   display: flex;
   -webkit-box-align: stretch;
   align-items: stretch;
 }
+
 .rd__button--download {
   padding-left: 25px;
   padding-right: 25px;
 }
 
-.rd-button-download--background{
+.rd-button-download--background {
   background: #05a081;
   color: #fff;
   border-color: #05a081;
 }
+
 .photo-page__section--photo {
   margin-bottom: 1.75rem;
 }
+.photo-page__action-buttons .rd__button{
+  padding: 11px 24px;
+  box-shadow: 0 1px 1px 0 rgb(0 0 5%);
+  font-weight: 300;
+}
+
 .photo-page__section {
   position: relative;
   padding: 0 5px;
 }
 
-@media (min-width: 850px)
-{.photo-page__photo__image {
-    padding-bottom: 0!important;
-  }}
+@media (min-width: 850px) {
+  .photo-page__photo__image {
+    padding-bottom: 0 !important;
+  }
+}
+
 .photo-page__photo__image {
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
   justify-content: center;
 }
+
 .photo-page__photo__image iframe {
   min-width: 100%;
   height: 65vh;
 }
+
 .photo-page__photo__image img {
   height: 100%;
   min-height: auto;
   width: 100%;
   min-height: 250px;
 }
+
 .rd__button--circle-icon .rd__svg-icon {
   width: 34px;
   height: 34px;
 }
 
-@media (max-width: 380px) {
-  .rd__modal__overlay{
-    width:80%;
-    max-height: 80vh;
-  }
-}
 
 .rd__button--white.rd__button--like--active:hover {
   background: #ff2121;
   border-color: #ff2121;
   color: #fff;
 }
+
 .rd__button--white.rd__button--like--active {
   background: #ff2121;
-  color: #fff!important;
+  color: #fff !important;
   border-color: #ff2121;
 }
+
 .rd__button--white.rd__button--like--active:hover .rd__svg-icon svg {
   fill: #fff;
 }
+
 .rd__button--white.rd__button--like--active .rd__svg-icon svg {
-   fill: #fff;
- }
+  fill: #fff;
+}
+
+.rd__avatar {
+  max-width: 22px;
+  max-height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.rd__avatar--large img {
+  border-radius: 50%;
+}
+
+.rd__avatar img {
+  -o-object-fit: fill;
+  object-fit: fill;
+  min-width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+img {
+  max-width: 100%;
+}
+
+.photo-page__mini-profile__avatar {
+  margin-right: 10px;
+  max-width: 52px;
+  max-height: 52px;
+  min-width: 52px;
+  min-height: 52px;
+}
+
+.level__item * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.rd__avatar--large {
+  max-width: 50px;
+  max-height: 50px;
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 50%;
+}
+.rd__button-group--bar--border-between>.rd__button:not(:last-child) {
+  position: relative;
+}
+.rd__button-group--bar .rd__dropdown:first-child>.rd__button, .rd__button-group--bar>.rd__button:not(:last-child) {
+  margin-right: 0!important;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+
+.rd__button-group--space-with-margin-left .rd__dropdown>.rd__button:not(:last-child), .rd__button-group--space-with-margin-left>*:not(.rd__dropdown):not(:last-child) {
+  margin-right: 0;
+}
+.rd__button-group .rd__dropdown>.rd__button:not(:last-child), .rd__button-group>*:not(.rd__dropdown):not(:last-child) {
+  margin-right: .6rem;
+}
+@media (max-width: 849px){.photo-page__action-buttons .rd__button--download {
+  width: 100%;
+}}
+
+  .rd__button-group--bar .rd__button {
+    box-shadow: none;
+  }
+  .level__item * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rd__button--download {
+    padding-left: 25px;
+    padding-right: 25px;
+  }

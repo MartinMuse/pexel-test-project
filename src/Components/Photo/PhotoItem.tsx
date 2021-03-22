@@ -20,14 +20,39 @@ export const PhotoItem: FC<IPhotoItem> = ({photo,imageClickHandler}) => {
     // }
 
 
-    return (<div key={photo.id} className={'masonry-item overlay'}>
+    return (
+        <div key={photo.id} className={'masonry-item overlay'}>
                 <a href={'/#'} onClick={(e) => {}}>
                     <img src={photo.src.large} alt={''} onClick={(e)=>imageClickHandler(e,photo)} className={'masonry-item__img'}/>
                 </a>
+
                 <a className={`masonry-item__photographer`} href={photo.photographer_url} target="_blank">
+                    <img className="photo-item__avatar" height="30" width="30" role="presentation"
+                         data-overview-tooltip-pointer-element="true"
+                         src="https://image.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"/>
                     <span className="masonry-item__name">{photo.photographer}</span>
                 </a>
             <div className="masonry-item__info">
+                <a className="js-download js-download-6569318 rd__button rd__button--download rd__button--no-padding rd__button--text-white rd__button--with-icon"
+                   data-medium-id="6569318" data-request-path="/after_download_modal/" download=""
+                   href={`https://www.pexels.com/photo/${photo.id}/download/`}>
+                    <i className="rd__button--download--not-active--icon rd__svg-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg"  height="100px" width="100px" fill="#000000" version="1.1" x="0px" y="0px"
+                             viewBox="0 0 100 100" style={{background: 'new 0 0 100 100'}}><g>
+                            <path d="M72.2,43.2L58,57.4V17c0-2.2-1.8-4-4-4s-4,1.8-4,4v40.4L35.8,43.2c-1.6-1.6-4.1-1.6-5.7,0c-1.6,1.6-1.6,4.1,0,5.7l21,21   C52,70.7,53,71,54,71s2-0.4,2.8-1.2l21-21c1.6-1.6,1.6-4.1,0-5.7C76.3,41.6,73.8,41.6,72.2,43.2z"></path><path
+                            d="M32,87h44c2.2,0,4-1.8,4-4s-1.8-4-4-4H32c-2.2,0-4,1.8-4,4S29.8,87,32,87z"></path></g></svg>
+                    </i>
+                </a>
+                <button
+                    className="js-collect js-collect-6569318 rd__button rd__button--collect rd__button--no-padding rd__button--text-white rd__button--with-icon"
+                    data-photo-id="6569318" data-initialized="true">
+                    <i className="rd__button--collect--not-active--icon rd__svg-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
+                        </svg>
+                    </i>
+                </button>
                 <button
                     className={`js-like js-like-6357726 rd__button rd__button--like
                      rd__button--no-padding rd__button--text-white rd__button--with-icon ${isClicked?'rd__button--like--active':''}`}

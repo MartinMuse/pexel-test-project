@@ -32,7 +32,7 @@ export const SearchPage: FC<ISearchPageProps> = ({searchPhotosHandler, infiniteP
     }else{
          content = (
             error
-                ? <div className={'notification is-danger mt-6 has-text-centered'}>{error}</div>
+                ?   <h1 className="search__header__title">{Error}</h1>
                 : <Fragment>
                     <section className="search__header">
                         <h1 className="search__header__title">{search}</h1>
@@ -41,7 +41,7 @@ export const SearchPage: FC<ISearchPageProps> = ({searchPhotosHandler, infiniteP
                         {photos.length > 0
                             ? <InfiniteScrollContainer imageClickHandler={imageClickHandler} loader={<Loader/>}
                                                        photos={photos} hasMore={true} next={infinitePhotoHandler}/>
-                            : <p className={'has-text-centered'}>No results</p>
+                            : <h1 className="search__header__title">No results</h1>
                         }
                     </div>
                 </Fragment>

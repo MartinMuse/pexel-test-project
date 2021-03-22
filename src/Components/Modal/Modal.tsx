@@ -1,5 +1,8 @@
 import React, {FC, useState} from "react";
 import "./Modal.css"
+import "./ModalMedia.css"
+import {ModalNavbar} from "./ModalNavBar/ModalNavbar";
+import {PhotoDetailsSection} from "./PhotoDetailsSection/PhotoDetailsSection";
 
 interface IModalProps {
     src: string
@@ -9,16 +12,19 @@ interface IModalProps {
     pictureId: number
 }
 
-export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl,pictureId}) => {
-    const like=100;
-    const [isActive,setIsActive]=useState(false)
-    const onClickLikeHandler=()=>{
+export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pictureId}) => {
+    const like = 100;
+    const [isActive, setIsActive] = useState(false)
+    const onClickLikeHandler = () => {
         setIsActive(prevState => !prevState)
     }
     return (
         <div className='rd__modal rd__modal--open'>
+            <ModalNavbar onClose={onClose}/>
             <div className={'rd__modal__overlay'}>
-                <button className="js-modal-close-button rd__modal__exit rd__button rd__button--text-white rd__button--circle-icon" onClick={onClose}>
+                <button
+                    className="js-modal-close-button rd__modal__exit rd__button rd__button--text-white rd__button--circle-icon"
+                    onClick={onClose}>
                     <i className="rd__svg-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path
@@ -37,12 +43,18 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl,pict
                                                 <a className="js-photo-page-mini-profile-link photo-page__mini-profile"
                                                    data-track-action="medium-mini-profile"
                                                    data-track-label="user-profile" href={authorUrl} target="_blank">
+                                                    <div
+                                                        className="js-photo-page-mini-profile-avatar photo-page__mini-profile__avatar rd__avatar rd__avatar--large">
+                                                        <img alt="undefined" height="50"
+                                                             src="https://image.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
+                                                             width="50"/>
+                                                    </div>
                                                     <div className="photo-page__mini-profile__text">
-                                                        <h3 className="js-photo-page-mini-profile-full-name photo-page__mini-profile__text__title">{authorName}</h3>
+                                                        <h3 className="js-photo-page-mini-profile-full-name
+                                                         photo-page__mini-profile__text__title">{authorName}</h3>
                                                     </div>
                                                 </a>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -51,11 +63,11 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl,pict
                                         <div className="rd__button-group photo-page__action-buttons">
                                             <button
                                                 className={`js-like js-photo-page-action-buttons-like
-                                                 rd__button rd__button--white rd__button--with-icon-left js-like-4752993 ${isActive?"rd__button--like--active":""}`}
+                                                 rd__button rd__button--white rd__button--with-icon-left js-like-4752993 ${isActive ? "rd__button--like--active" : ""}`}
                                                 data-photo-id="4752993" data-initialized="true"
                                                 onClick={onClickLikeHandler}>
                                                 <i className="rd__button--like--not-active--icon rd__svg-icon"
-                                                   style={isActive?{display: "none"}:{}}>
+                                                   style={isActive ? {display: "none"} : {}}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                          viewBox="0 0 24 24">
                                                         <path
@@ -63,7 +75,7 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl,pict
                                                     </svg>
                                                 </i>
                                                 <i className="rd__button--like--active rd__svg-icon"
-                                                   style={isActive?{}:{display: "none"}}>
+                                                   style={isActive ? {} : {display: "none"}}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                          viewBox="0 0 24 24">
                                                         <path
@@ -74,6 +86,19 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl,pict
                                                     className="js-count">{like}</span> likes</span>
                                             </button>
 
+                                            <button
+                                                className="js-collect js-photo-page-action-buttons-collect rd__button rd__button--white rd__button--with-icon-left js-collect-6569318"
+                                                data-photo-id="6569318" data-initialized="true">
+                                                <i className="rd__button--collect--not-active--icon rd__svg-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
+                                                    </svg>
+                                                </i>
+                                                <span>Collect</span>
+                                            </button>
+
                                             <div className="js-photo-page-action-buttons-download">
                                                 <div
                                                     className="rd__button-group
@@ -81,7 +106,9 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl,pict
                                                     rd__button-group--bar rd__button-group--bar--border-between "
                                                     style={{height: "100%"}}>
                                                     <a className="js-download-a-tag rd__button rd__button--download rd-button-download--background"
-                                                       download="" href={`https://www.pexels.com/photo/${pictureId}/download/`} rel="nofollow">
+                                                       download=""
+                                                       href={`https://www.pexels.com/photo/${pictureId}/download/`}
+                                                       rel="nofollow">
                                                         <span>Free Download</span>
                                                     </a>
                                                 </div>
@@ -93,24 +120,22 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl,pict
                         </section>
                         <section className="photo-page__section photo-page__section--photo">
                             <div className="photo-page__photo">
-                                <a className="js-photo-page-image-download-link"
-                                   href="/#">
-                                    <div className="js-photo-zoom-container photo-page__photo__image" style={{}}>
-                                        <iframe  className="js-photo-page-video-iframe"
-                                                frameBorder="0"
-                                                style={{background: "white", display: "none"}}
-                                                ></iframe>
+                                    <div className="photo-page__photo__image" style={{}}>
                                         <img className="js-photo-page-image-img"
                                              src={src}
-                                             style={{background: "rgb(68, 56, 50)", maxHeight: "75vh", maxWidth: "calc(50vh)", minHeight: "30mт0px", minWidth: "calc(200px)"}}/>
+                                             style={{
+                                                 background: "rgb(68, 56, 50)",
+                                                 maxHeight: "75vh",
+                                                 maxWidth: "calc(50vh)",
+                                                 minHeight: "30mт0px",
+                                                 minWidth: "calc(200px)"
+                                             }}/>
                                     </div>
-                                </a>
                             </div>
                         </section>
+                        <PhotoDetailsSection authorName={authorName} authorUrl={authorUrl}/>
                     </div>
                 </div>
-
-
             </div>
         </div>
     )

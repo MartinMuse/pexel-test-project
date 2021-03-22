@@ -126,3 +126,19 @@
   cursor: pointer;
   z-index: 1;
 }
+@media (max-width: 849px){
+  .main-nav-bar>*:not(:last-child) {
+    margin-right: 1rem;
+  }}
+@media (max-width: 1000px){
+  .main-nav-bar .hide-when-mid-size-and-smaller {
+    display: none!important;
+  }
+}
+@media (max-width: 849px){
+  .search-bar__container input {
+    padding-top: .625rem;
+    padding-bottom: .625rem;
+    font-weight: 500;
+  }
+}

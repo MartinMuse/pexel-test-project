@@ -1,0 +1,56 @@
+.hero__footer {
+  display: block;
+  font-size: 12px;
+  line-height: 19px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: absolute;
+  height: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding: 0 1.15rem;
+  z-index: 3;
+}
+.hero__footer__item {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  height: 100%;
+  font-weight: inherit;
+}
+.hero__footer__item--align-right {
+  align-self: flex-end;
+  text-align: right;
+}
+.hero__footer__item {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  height: 100%;
+  font-weight: inherit;
+}
+.hero__footer__item a {
+  display: block;
+  font-size: 12px;
+  line-height: 19px;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #fff;
+  text-decoration: none;
+  opacity: .5;
+}
+
+.hero__footer__item a:hover{
+  opacity: 1;
+}

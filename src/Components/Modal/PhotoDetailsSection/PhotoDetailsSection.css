@@ -1,0 +1,133 @@
+.photo-page__section--photo-details {
+  margin-bottom: 20px;
+}
+.photo-page__section {
+  position: relative;
+  padding: 0 5px;
+}
+.photo-page__photo-details-overview {
+  max-width: 650px;
+  margin: auto;
+  text-align: center;
+}
+@media (min-width: 850px){
+  .photo-page .photo-page__visible-on-mobile {
+    display: none!important;
+  }
+}
+
+.rd__card {
+  border-radius: 4px;
+  border: 1px solid rgba(26,26,26,.15);
+  padding: 1.15rem;
+  background: #fff;
+}
+
+.rd__card__title {
+  display: block;
+  font-size: 10px;
+  line-height: 19px;
+  font-weight: 300;
+  margin-top: 0;
+  letter-spacing: .4px;
+  margin-bottom: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #5e5e5e;
+  text-align: left;
+}
+.rd__card__section:not(:last-child) {
+  margin-bottom: 1.15rem;
+}
+.photo-page__mini-profile {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 20px;
+}
+.photo-page__mini-profile__avatar {
+  margin-right: 10px;
+  max-width: 52px;
+  max-height: 52px;
+  min-width: 52px;
+  min-height: 52px;
+}
+.rd__avatar--large {
+  max-width: 50px;
+  max-height: 50px;
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 50%;
+}
+.rd__avatar {
+  max-width: 22px;
+  max-height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #fff;
+}
+.photo-page__mini-profile__text {
+  max-width: 150px;
+}
+.photo-page__mini-profile__text__title {
+  display: block;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: left;
+}
+.photo-page__mini-profile__text>* {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.photo-page__mini-profile__text__subtitle {
+  display: block;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+photo-page__photo-details-overview__description {
+  display: block;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 9px;
+  color: #5e5e5e;
+}
+p {
+  line-height: 1.5;
+  margin: 0 0 10px;
+}
+
+@media (max-width: 849px){
+  .photo-page__section--photo-details {
+    -webkit-box-ordinal-group: 4;
+    order: 3;
+    margin-bottom: 1.15rem;
+  }
+  .photo-page__section {
+    padding: 0 1.15rem;
+  }
+}
+
+
