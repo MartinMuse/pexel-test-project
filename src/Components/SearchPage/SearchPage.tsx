@@ -26,6 +26,7 @@ export const SearchPage: FC<ISearchPageProps> = ({searchPhotosHandler, infiniteP
                                                      showModal, loading, pictureInf, search}) => {
 
     const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
+    const {likes} = useSelector((state: RootState) => state.likes)
     let content = null
     if (loading) {
         content = <Loader/>
@@ -40,7 +41,7 @@ export const SearchPage: FC<ISearchPageProps> = ({searchPhotosHandler, infiniteP
                     <div className={'search__grid'}>
                         {photos.length > 0
                             ? <InfiniteScrollContainer imageClickHandler={imageClickHandler} loader={<Loader/>}
-                                                       photos={photos} hasMore={true} next={infinitePhotoHandler}/>
+                                                       photos={photos} hasMore={true} likes={likes} next={infinitePhotoHandler}/>
                             : <h1 className="search__header__title">No results</h1>
                         }
                     </div>
@@ -56,7 +57,7 @@ export const SearchPage: FC<ISearchPageProps> = ({searchPhotosHandler, infiniteP
             </div>
             {showModal && <Modal src={pictureInf.src} authorName={pictureInf.authorName}
                                  authorUrl={pictureInf.authorUrl} onClose={modalCloseHandler}
-                                 pictureId={pictureInf.pictureId}/>}
+                                 pictureId={pictureInf.pictureId} isLiked={likes.indexOf(pictureInf.pictureId)!==-1}/>}
         </div>
     )
 }

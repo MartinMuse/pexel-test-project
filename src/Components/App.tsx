@@ -13,6 +13,7 @@ export interface IPictureInf {
     authorUrl: string
     authorName: string
     pictureId: number
+
 }
 
 const App: FC = () => {
@@ -20,6 +21,7 @@ const App: FC = () => {
     const history = useHistory()
     const [searchFor, setSearchFor] = useState('')
     const [page, setPage] = useState(1);
+    const [likes, setLikes] = useState<number[]>([]);
     const [mode, setMode] = useState('trending')
     const [showModal, setShowModal] = useState(false)
     const [loading, setLoading] = useState(false);
@@ -28,8 +30,15 @@ const App: FC = () => {
         src: '',
         authorUrl: '',
         authorName: '',
-        pictureId: 0
+        pictureId: 0,
     })
+
+    // useEffect(()=>{
+    //     const likes=localStorage.getItem('likes')
+    //     if (likes)
+    //         setLikes(JSON.parse(likes))
+    // },[])
+
 
     const searchPhotosHandler = (query: string) => {
         if (error) {
@@ -58,7 +67,8 @@ const App: FC = () => {
             src: '',
             authorUrl: '',
             authorName: '',
-            pictureId: 0
+            pictureId: 0,
+
         })
         document.body.style.overflow = 'auto'
     }
@@ -73,7 +83,7 @@ const App: FC = () => {
             src: photo.src.large,
             authorUrl: photo.photographer_url,
             authorName: photo.photographer,
-            pictureId: photo.id
+            pictureId: photo.id,
         })
         setShowModal(true)
         document.body.style.overflow = 'hidden'

@@ -28,6 +28,9 @@ export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler,
     const title='Free Stock Photos'
     const dispatch = useDispatch()
     const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
+    const {likes} = useSelector((state: RootState) => state.likes)
+
+
     useEffect(() => {
         dispatch(getCuratedPhotos(1, () => setLoadingHandler(false), () => setLoadingHandler(false)));
     }, [dispatch]);
@@ -43,7 +46,7 @@ export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler,
                         <div className="js-home-links-title title-tabs__title">{title}</div>
                     </div>
                     {photos.length > 0
-                        ? <InfiniteScrollContainer imageClickHandler={imageClickHandler} loader={<Loader/>}
+                        ? <InfiniteScrollContainer likes={likes} imageClickHandler={imageClickHandler} loader={<Loader/>}
                                                    photos={photos} hasMore={true} next={infinitePhotoHandler}/>
                         : <p className={'has-text-centered'}>No results</p>
                     }
@@ -57,7 +60,7 @@ export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler,
             <div className={'l-container home-page'}>
                 {content}
             </div>
-            {showModal && <Modal src={pictureInf.src} authorName={pictureInf.authorName}
+            {showModal && <Modal isLiked={likes.indexOf(pictureInf.pictureId)!==-1} src={pictureInf.src} authorName={pictureInf.authorName}
                                  authorUrl={pictureInf.authorUrl} onClose={modalCloseHandler} pictureId={pictureInf.pictureId}/>}
         </div>
     )

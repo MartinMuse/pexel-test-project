@@ -2,9 +2,11 @@ import {createStore, applyMiddleware, combineReducers} from "redux";
 import thunk from 'redux-thunk';
 
 import {photoReducer} from './reducers/photosReducer';
+import {likesReducer} from "./reducers/likesReducer";
 
 const rootReducer = combineReducers({
-    photos: photoReducer
+    photos: photoReducer,
+    likes:likesReducer
 });
 const store = createStore(
     rootReducer,

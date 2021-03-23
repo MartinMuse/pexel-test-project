@@ -1,22 +1,28 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import "./Modal.css"
 import "./ModalMedia.css"
 import {ModalNavbar} from "./ModalNavBar/ModalNavbar";
 import {PhotoDetailsSection} from "./PhotoDetailsSection/PhotoDetailsSection";
+import {deleteLike, setLike} from "../../Redux/actions/likesActions";
+import {useDispatch} from "react-redux";
 
 interface IModalProps {
     src: string
     onClose: () => void
     authorName: string
     authorUrl: string
-    pictureId: number
+    pictureId: number,
+    isLiked:boolean
 }
 
-export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pictureId}) => {
-    const like = 100;
-    const [isActive, setIsActive] = useState(false)
+export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pictureId,isLiked}) => {
+    const dispatch=useDispatch()
     const onClickLikeHandler = () => {
-        setIsActive(prevState => !prevState)
+        if (isLiked) {
+            dispatch(deleteLike(pictureId))
+        } else {
+            dispatch(setLike(pictureId))
+        }
     }
     return (
         <div className='rd__modal rd__modal--open'>
@@ -63,11 +69,11 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
                                         <div className="rd__button-group photo-page__action-buttons">
                                             <button
                                                 className={`js-like js-photo-page-action-buttons-like
-                                                 rd__button rd__button--white rd__button--with-icon-left js-like-4752993 ${isActive ? "rd__button--like--active" : ""}`}
+                                                 rd__button rd__button--white rd__button--with-icon-left js-like-4752993 ${isLiked ? "rd__button--like--active" : ""}`}
                                                 data-photo-id="4752993" data-initialized="true"
                                                 onClick={onClickLikeHandler}>
                                                 <i className="rd__button--like--not-active--icon rd__svg-icon"
-                                                   style={isActive ? {display: "none"} : {}}>
+                                                   style={isLiked ? {display: "none"} : {}}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                          viewBox="0 0 24 24">
                                                         <path
@@ -75,15 +81,15 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
                                                     </svg>
                                                 </i>
                                                 <i className="rd__button--like--active rd__svg-icon"
-                                                   style={isActive ? {} : {display: "none"}}>
+                                                   style={isLiked ? {} : {display: "none"}}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                          viewBox="0 0 24 24">
                                                         <path
                                                             d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
                                                     </svg>
                                                 </i>
-                                                <span className="js-text"><span
-                                                    className="js-count">{like}</span> likes</span>
+                                                {/*<span className="js-text"><span*/}
+                                                {/*    className="js-count">{like}</span> likes</span>*/}
                                             </button>
 
                                             <button
