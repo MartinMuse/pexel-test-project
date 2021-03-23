@@ -83,10 +83,10 @@ const App: FC = () => {
 
     return (
         <div className={'App'}>
-            <Route exact path={'/'}>
-                <Redirect to="/main"/>
-            </Route>
-            <Route exact path={'/main'} render={() => <Main imageClickHandler={imageClickHandler}
+            {/*<Route exact path={'/'}>*/}
+            {/*    <Redirect to="/main"/>*/}
+            {/*</Route>*/}
+            <Route exact path={'/'} render={() => <Main imageClickHandler={imageClickHandler}
                                                             infinitePhotoHandler={infinitePhotoHandler}
                                                             modalCloseHandler={modalCloseHandler}
                                                             searchPhotosHandler={searchPhotosHandler}
