@@ -34,13 +34,11 @@ export const PhotoItem: FC<IPhotoItem> = ({photo, imageClickHandler, isLiked}) =
 
             <a className={`masonry-item__photographer`} href={photo.photographer_url} target="_blank">
                 <img className="photo-item__avatar" height="30" width="30" role="presentation"
-                     data-overview-tooltip-pointer-element="true"
                      src="https://image.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"/>
                 <span className="masonry-item__name">{photo.photographer}</span>
             </a>
             <div className="masonry-item__info">
-                <a className="js-download js-download-6569318 rd__button rd__button--download rd__button--no-padding rd__button--text-white rd__button--with-icon"
-                   data-medium-id="6569318" data-request-path="/after_download_modal/" download=""
+                <a className="js-download js-download-6569318 rd__button rd__button--download rd__button--no-padding rd__button--text-white rd__button--with-icon" download=""
                    href={`https://www.pexels.com/photo/${photo.id}/download/`}>
                     <i className="rd__button--download--not-active--icon rd__svg-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100px" width="100px" fill="#000000"

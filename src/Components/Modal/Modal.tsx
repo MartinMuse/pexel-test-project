@@ -46,9 +46,7 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
                                     <div className="level__item">
                                         <div className="level level--responsive-large">
                                             <div className="level__item">
-                                                <a className="js-photo-page-mini-profile-link photo-page__mini-profile"
-                                                   data-track-action="medium-mini-profile"
-                                                   data-track-label="user-profile" href={authorUrl} target="_blank">
+                                                <a className="js-photo-page-mini-profile-link photo-page__mini-profile" href={authorUrl} target="_blank">
                                                     <div
                                                         className="js-photo-page-mini-profile-avatar photo-page__mini-profile__avatar rd__avatar rd__avatar--large">
                                                         <img alt="undefined" height="50"
@@ -69,8 +67,7 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
                                         <div className="rd__button-group photo-page__action-buttons">
                                             <button
                                                 className={`js-like js-photo-page-action-buttons-like
-                                                 rd__button rd__button--white rd__button--with-icon-left js-like-4752993 ${isLiked ? "rd__button--like--active" : ""}`}
-                                                data-photo-id="4752993" data-initialized="true"
+                                                 rd__button rd__button--white rd__button--with-icon-left ${isLiked ? "rd__button--like--active" : ""}`}
                                                 onClick={onClickLikeHandler}>
                                                 <i className="rd__button--like--not-active--icon rd__svg-icon"
                                                    style={isLiked ? {display: "none"} : {}}>
@@ -91,7 +88,7 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
                                             </button>
 
                                             <button
-                                                className="js-collect js-photo-page-action-buttons-collect rd__button rd__button--white rd__button--with-icon-left js-collect-6569318"
+                                                className="js-collect js-photo-page-action-buttons-collect rd__button rd__button--white rd__button--with-icon-left"
                                                 data-photo-id="6569318" data-initialized="true">
                                                 <i className="rd__button--collect--not-active--icon rd__svg-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
