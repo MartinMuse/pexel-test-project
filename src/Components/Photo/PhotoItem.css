@@ -252,24 +252,25 @@ img {
   max-width: 100%;
 }
 
-@media (max-width: 699px){
-  .masonry-item .rd__button--collect, .masonry-item .rd__button--like {
-    display: none;
+
+@media (max-width: 849px) {
+  .masonry-item .js-collect, .masonry-item__info .js-like, .masonry-item__info .js-download {
+    opacity: 1;
+    width: 40px;
   }
 }
 
-  @media (max-width: 849px){
-    .masonry-item .js-collect, .masonry-item__info .js-like, .masonry-item__info .js-download {
-      opacity: 1;
-      width: 40px;
-    }
+@media (max-width: 699px) {
+  .masonry-item .rd__button--collect, .masonry-item .rd__button--like {
+    display: none;
   }
-@media (max-width: 699px){
+
   .masonry-item:before {
     opacity: .3;
   }
-  .masonry-item__photographer{
-    opacity:0!important;
+
+  .masonry-item__photographer {
+    opacity: 0 !important;
   }
 }
 

@@ -21,7 +21,6 @@ const App: FC = () => {
     const history = useHistory()
     const [searchFor, setSearchFor] = useState('')
     const [page, setPage] = useState(1);
-    const [likes, setLikes] = useState<number[]>([]);
     const [mode, setMode] = useState('trending')
     const [showModal, setShowModal] = useState(false)
     const [loading, setLoading] = useState(false);
@@ -32,13 +31,6 @@ const App: FC = () => {
         authorName: '',
         pictureId: 0,
     })
-
-    // useEffect(()=>{
-    //     const likes=localStorage.getItem('likes')
-    //     if (likes)
-    //         setLikes(JSON.parse(likes))
-    // },[])
-
 
     const searchPhotosHandler = (query: string) => {
         if (error) {

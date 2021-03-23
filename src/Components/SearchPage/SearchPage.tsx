@@ -1,6 +1,5 @@
 import React, {FC, Fragment, useState} from "react";
 import {Navbar} from "../Navbar/Navbar";
-import {Header} from "../Main/Header/Header";
 import {Modal} from "../Modal/Modal";
 import {Photo} from "pexels";
 import {IPictureInf} from "../App";
