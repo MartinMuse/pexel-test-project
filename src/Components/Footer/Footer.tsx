@@ -29,27 +29,6 @@ export const Footer:FC=()=>{
                         <li>
                             <a className="footer__link footer__body__column__link" href="https://www.pexels.com/api/" target={"_blank"}>Image &amp; Video API</a>
                         </li>
-                        <li>
-                            <div className="rd__button-group rd__button-group--bar rd__button-group--no-shadow">
-                                <a className="footer__link rd__button rd__button--text-white" href="https://www.facebook.com/pexels"
-                                 style={{paddingLeft:'0'}} target="_blank" title="Facebook">
-                                    <i className="icon-facebook"></i>
-                                </a>
-                                <a className="footer__link rd__button rd__button--text-white"
-                                   href="https://twitter.com/pexels" target="_blank" title="Twitter">
-                                    <i className="icon-twitter"></i>
-                                </a>
-                                <a className="footer__link rd__button rd__button--text-white"
-                                  href="https://instagram.com/pexels/"
-                                   target="_blank" title="Instagram">
-                                    <i className="icon-instagram"></i>
-                                </a>
-                                <a className="footer__link rd__button rd__button--text-white"
-                                  href="https://www.pinterest.com/pexels" target="_blank" title="Pinterest">
-                                    <i className="icon-pinterest"></i>
-                                </a>
-                            </div>
-                        </li>
                     </ul>
                 </li>
                 <li style={{flexBasis:'80%'}}>

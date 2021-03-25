@@ -1,3 +1,23 @@
+.rd__button_footer {
+  line-height: 1;
+  position: relative;
+  display: -webkit-inline-box;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 11px 24px;
+}
 .footer {
   background: #071b4d;
   color: #fff;
@@ -95,4 +115,7 @@ a {
 }
 .icon-pinterest:before {
   content: "\70";
+}
+a.footer__link:hover, a.footer__link:focus {
+  opacity: 1;
 }

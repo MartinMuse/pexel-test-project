@@ -38,7 +38,7 @@ export const CollectionPage: FC<ICollectionPageProps> = ({searchPhotosHandler, i
                         {collection.length > 0
                             ? <InfiniteScrollContainer imageClickHandler={imageClickHandler} loader={<Loader/>}
                                                        photos={collection} hasMore={false} likes={likes} next={infinitePhotoHandler} isCollectionPage={true}/>
-                            : <h1 className="search__header__title">No results</h1>
+                            : <h1 className="search__header__title">Your collection is empty</h1>
                         }
                     </div>
                 </Fragment>
