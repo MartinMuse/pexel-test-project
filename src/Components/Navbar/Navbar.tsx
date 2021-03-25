@@ -1,6 +1,7 @@
 import {FC, useState} from "react";
 import './Navbar.css'
 import {SearchBar} from "../SearchBar/SearchBar";
+import {NavLink} from "react-router-dom";
 
 interface INavbarProps {
     onSearch: (value: string) => void
@@ -24,7 +25,7 @@ export const Navbar: FC<INavbarProps> = ({onSearch, isAlwaysActive = false}) => 
 
     return (
         <nav className={`main-nav-bar ${navbar}`}>
-            <a className="main-nav-bar__logo" href="/" title="Free Stock Photos">
+            <NavLink className="main-nav-bar__logo" to="/" title="Free Stock Photos">
                 <div className="main-nav-bar__logo__img">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32">
                         <path d="M2 0h28a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"
@@ -35,14 +36,14 @@ export const Navbar: FC<INavbarProps> = ({onSearch, isAlwaysActive = false}) => 
                     </svg>
                 </div>
                 <div className="hide-when-mid-size-and-smaller main-nav-bar__logo__text">Pexels</div>
-            </a>
+            </NavLink>
             <div className={'main-nav-bar__search-bar'}>
                 <SearchBar onSearch={onSearch} placeHolder={'Search for free photos'} activeClass={searchbar}/>
             </div>
             <ul className={'main-nav-bar__sub-nav'}>
                 <li className="collection-button">
-                    <a className="main-nav-bar__sub-nav__item main-nav-bar__sub-nav__item--button"
-                       href="/collection">Collection</a>
+                    <NavLink className="main-nav-bar__sub-nav__item main-nav-bar__sub-nav__item--button"
+                       to="/collection">Collection</NavLink>
                 </li>
             </ul>
         </nav>)
