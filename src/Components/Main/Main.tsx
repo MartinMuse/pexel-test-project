@@ -19,17 +19,16 @@ interface IMainProps {
     showModal: boolean,
     loading: boolean
     setLoadingHandler: (value: boolean) => void
-    pictureInf: IPictureInf
+    activePhoto: Photo | null
 }
 
 
-export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler,
-                                         modalCloseHandler, imageClickHandler, showModal, loading, setLoadingHandler,pictureInf}) => {
-    const title='Free Stock Photos'
+export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler, modalCloseHandler, imageClickHandler, showModal, loading, setLoadingHandler, activePhoto}) => {
+    const title = 'Free Stock Photos'
     const dispatch = useDispatch()
     const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
     const {likes} = useSelector((state: RootState) => state.likes)
-
+    const {collection} = useSelector((state: RootState) => state.collection)
 
     useEffect(() => {
         dispatch(getCuratedPhotos(1, () => setLoadingHandler(false), () => setLoadingHandler(false)));
@@ -47,7 +46,8 @@ export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler,
                     </div>
                     {photos.length > 0
                         ? <InfiniteScrollContainer likes={likes} imageClickHandler={imageClickHandler} loader={<Loader/>}
-                                                   photos={photos} hasMore={true} next={infinitePhotoHandler}/>
+                                                   photos={photos} hasMore={true} next={infinitePhotoHandler}
+                                                   collection={collection}/>
                         : <p className={'has-text-centered'}>No results</p>
                     }
                 </Fragment>
@@ -60,8 +60,10 @@ export const Main: FC<IMainProps> = ({infinitePhotoHandler, searchPhotosHandler,
             <div className={'l-container home-page'}>
                 {content}
             </div>
-            {showModal && <Modal isLiked={likes.indexOf(pictureInf.pictureId)!==-1} src={pictureInf.src} authorName={pictureInf.authorName}
-                                 authorUrl={pictureInf.authorUrl} onClose={modalCloseHandler} pictureId={pictureInf.pictureId}/>}
+            {activePhoto ?
+                showModal && <Modal isLiked={likes.indexOf(activePhoto.id) !== -1}
+                                    isCollected={collection.findIndex((p)=>p.id===activePhoto.id)!==-1} onClose={modalCloseHandler} photo={activePhoto}/>
+                : <></>}
         </div>
     )
 

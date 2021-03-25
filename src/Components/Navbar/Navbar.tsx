@@ -39,7 +39,11 @@ export const Navbar: FC<INavbarProps> = ({onSearch, isAlwaysActive = false}) => 
             <div className={'main-nav-bar__search-bar'}>
                 <SearchBar onSearch={onSearch} placeHolder={'Search for free photos'} activeClass={searchbar}/>
             </div>
-            <ul>
+            <ul className={'main-nav-bar__sub-nav'}>
+                <li className="collection-button">
+                    <a className="main-nav-bar__sub-nav__item main-nav-bar__sub-nav__item--button"
+                       href="/collection">Collection</a>
+                </li>
             </ul>
         </nav>)
 

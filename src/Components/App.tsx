@@ -7,13 +7,14 @@ import {RootState} from "../Redux/store";
 import {getCuratedPhotos, getPhotos, setError} from "../Redux/actions/photoActions";
 import {Photo} from "pexels";
 import {SearchPage} from "./SearchPage/SearchPage";
+import {CollectionPage} from "./CollectionPage/CollectionPage";
 
 export interface IPictureInf {
     src: string
     authorUrl: string
     authorName: string
     pictureId: number
-
+    photo:Photo|null
 }
 
 const App: FC = () => {
@@ -25,12 +26,7 @@ const App: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [loading, setLoading] = useState(false);
     const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
-    const [pictureInf, setPictureInf] = useState<IPictureInf>({
-        src: '',
-        authorUrl: '',
-        authorName: '',
-        pictureId: 0,
-    })
+    const [activePhoto, setActivePhoto] = useState<Photo|null>(null)
 
     const searchPhotosHandler = (query: string) => {
         if (error) {
@@ -55,13 +51,7 @@ const App: FC = () => {
 
     const modalCloseHandler = () => {
         setShowModal(false)
-        setPictureInf({
-            src: '',
-            authorUrl: '',
-            authorName: '',
-            pictureId: 0,
-
-        })
+        setActivePhoto(null)
         document.body.style.overflow = 'auto'
     }
 
@@ -71,12 +61,7 @@ const App: FC = () => {
 
     const imageClickHandler = (e: MouseEvent, photo: Photo) => {
         e.preventDefault()
-        setPictureInf({
-            src: photo.src.large,
-            authorUrl: photo.photographer_url,
-            authorName: photo.photographer,
-            pictureId: photo.id,
-        })
+        setActivePhoto(photo)
         setShowModal(true)
         document.body.style.overflow = 'hidden'
     }
@@ -92,7 +77,7 @@ const App: FC = () => {
                                                             searchPhotosHandler={searchPhotosHandler}
                                                             setLoadingHandler={setLoadingHandler}
                                                             showModal={showModal} loading={loading}
-                                                            pictureInf={pictureInf}/>}/>
+                                                            activePhoto={activePhoto}/>}/>
 
             <Route path={'/search'} render={() => <SearchPage imageClickHandler={imageClickHandler}
                                                               infinitePhotoHandler={infinitePhotoHandler}
@@ -100,10 +85,15 @@ const App: FC = () => {
                                                               searchPhotosHandler={searchPhotosHandler}
                                                               setLoadingHandler={setLoadingHandler}
                                                               showModal={showModal} loading={loading}
-                                                              pictureInf={pictureInf}
-                                                              search={searchFor}
-            />}/>
-
+                                                              activePhoto={activePhoto}
+                                                              search={searchFor}/>}/>
+            <Route path={'/collection'} render={()=><CollectionPage  imageClickHandler={imageClickHandler}
+                                                                    infinitePhotoHandler={infinitePhotoHandler}
+                                                                    modalCloseHandler={modalCloseHandler}
+                                                                    searchPhotosHandler={searchPhotosHandler}
+                                                                    setLoadingHandler={setLoadingHandler}
+                                                                    showModal={showModal}
+                                                                    activePhoto={activePhoto} loading={false}/>}/>
         </div>
     );
 }

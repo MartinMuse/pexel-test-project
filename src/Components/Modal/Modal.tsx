@@ -5,23 +5,30 @@ import {ModalNavbar} from "./ModalNavBar/ModalNavbar";
 import {PhotoDetailsSection} from "./PhotoDetailsSection/PhotoDetailsSection";
 import {deleteLike, setLike} from "../../Redux/actions/likesActions";
 import {useDispatch} from "react-redux";
+import {deleteCollectionItem, setCollectionItem} from "../../Redux/actions/collectionActions";
+import {Photo} from "pexels";
 
 interface IModalProps {
-    src: string
     onClose: () => void
-    authorName: string
-    authorUrl: string
-    pictureId: number,
-    isLiked:boolean
+    photo:Photo
+    isLiked:boolean,
+    isCollected?:boolean
 }
 
-export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pictureId,isLiked}) => {
+export const Modal: FC<IModalProps> = ({onClose,isLiked,isCollected,photo}) => {
     const dispatch=useDispatch()
     const onClickLikeHandler = () => {
         if (isLiked) {
-            dispatch(deleteLike(pictureId))
+            dispatch(deleteLike(photo.id))
         } else {
-            dispatch(setLike(pictureId))
+            dispatch(setLike(photo.id))
+        }
+    }
+    const onClickCollectHandler = () => {
+        if (isCollected) {
+            dispatch(deleteCollectionItem(photo.id))
+        } else {
+            dispatch(setCollectionItem(photo))
         }
     }
     return (
@@ -46,7 +53,7 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
                                     <div className="level__item">
                                         <div className="level level--responsive-large">
                                             <div className="level__item">
-                                                <a className="js-photo-page-mini-profile-link photo-page__mini-profile" href={authorUrl} target="_blank">
+                                                <a className="js-photo-page-mini-profile-link photo-page__mini-profile" href={photo.photographer_url} target="_blank">
                                                     <div
                                                         className="js-photo-page-mini-profile-avatar photo-page__mini-profile__avatar rd__avatar rd__avatar--large">
                                                         <img alt="undefined" height="50"
@@ -55,7 +62,7 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
                                                     </div>
                                                     <div className="photo-page__mini-profile__text">
                                                         <h3 className="js-photo-page-mini-profile-full-name
-                                                         photo-page__mini-profile__text__title">{authorName}</h3>
+                                                         photo-page__mini-profile__text__title">{photo.photographer}</h3>
                                                     </div>
                                                 </a>
                                             </div>
@@ -89,12 +96,20 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
 
                                             <button
                                                 className="js-collect js-photo-page-action-buttons-collect rd__button rd__button--white rd__button--with-icon-left"
-                                                data-photo-id="6569318" data-initialized="true">
-                                                <i className="rd__button--collect--not-active--icon rd__svg-icon">
+                                                data-photo-id="6569318" data-initialized="true" onClick={onClickCollectHandler} >
+                                                <i className="rd__button--collect--not-active--icon rd__svg-icon" style={isCollected ? {display: "none"} : {}}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                          viewBox="0 0 24 24">
                                                         <path
                                                             d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
+                                                    </svg>
+                                                </i>
+                                                <i className="rd__button--collect--active--icon rd__svg-icon"
+                                                   style={isCollected ? {} : {display: "none"}}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
                                                     </svg>
                                                 </i>
                                                 <span>Collect</span>
@@ -108,7 +123,7 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
                                                     style={{height: "100%"}}>
                                                     <a className="js-download-a-tag rd__button rd__button--download rd-button-download--background"
                                                        download=""
-                                                       href={`https://www.pexels.com/photo/${pictureId}/download/`}
+                                                       href={`https://www.pexels.com/photo/${photo.id}/download/`}
                                                        rel="nofollow">
                                                         <span>Free Download</span>
                                                     </a>
@@ -123,7 +138,7 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
                             <div className="photo-page__photo">
                                     <div className="photo-page__photo__image" style={{}}>
                                         <img className="js-photo-page-image-img"
-                                             src={src}
+                                             src={photo.src.large}
                                              style={{
                                                  background: "rgb(68, 56, 50)",
                                                  maxHeight: "75vh",
@@ -134,7 +149,7 @@ export const Modal: FC<IModalProps> = ({src, onClose, authorName, authorUrl, pic
                                     </div>
                             </div>
                         </section>
-                        <PhotoDetailsSection authorName={authorName} authorUrl={authorUrl}/>
+                        <PhotoDetailsSection authorName={photo.photographer} authorUrl={photo.photographer_url}/>
                     </div>
                 </div>
             </div>

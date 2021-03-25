@@ -1,0 +1,98 @@
+.footer {
+  background: #071b4d;
+  color: #fff;
+}
+.footer__body {
+  display: -webkit-box;
+  display: flex;
+  margin: 0;
+  list-style: none;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+@media (max-width: 849px){
+  .footer__body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+  }
+  .footer__body, .footer__navbar {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .footer__body>*:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+}
+.footer__body__column {
+  -webkit-box-flex: 1;
+  flex: 1 1 100%;
+  margin: 0;
+  list-style: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+.footer__body__column__title {
+  display: block;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 9px;
+}
+.footer__link.footer__body__column__link {
+  display: block;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 5px;
+  text-decoration: none;
+}
+a.footer__link {
+  opacity: .6;
+}
+a {
+  color: inherit;
+}
+.rd__button-group .rd__dropdown>.rd__button:not(:last-child), .rd__button-group>*:not(.rd__dropdown):not(:last-child) {
+   margin-right: .6rem;
+ }
+.rd__button-group--bar .rd__dropdown:first-child>.rd__button, .rd__button-group--bar>.rd__button:not(:last-child) {
+  margin-right: 0!important;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+.rd__button-group--bar .rd__button {
+  box-shadow: none;
+}
+.rd__button--text-white {
+  background: 0 0;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: none;
+}
+.icon-facebook:before {
+  content: "\66";
+}
+[class^=icon-]:before, [class*=" icon-"]:before {
+  font-family: icons!important;
+  font-style: normal!important;
+  font-weight: 300!important;
+  font-variant: normal!important;
+  text-transform: none!important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-twitter:before {
+  content: "\74";
+}
+.icon-instagram:before {
+  content: "\69";
+}
+.icon-pinterest:before {
+  content: "\70";
+}

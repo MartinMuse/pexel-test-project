@@ -4,12 +4,13 @@ import {Modal} from "../Modal/Modal";
 import {Photo} from "pexels";
 import {IPictureInf} from "../App";
 import {Loader} from "../Loader/Loader";
-import './SearchPage.css'
+import './CollectionPage.css'
 import {InfiniteScrollContainer} from "../InfiniteScrollContainer/InfiniteScrollContainer";
 import {useSelector} from "react-redux";
 import {RootState} from "../../Redux/store";
+import {Footer} from "../Footer/Footer";
 
-interface ISearchPageProps {
+interface ICollectionPageProps {
     infinitePhotoHandler: () => void
     searchPhotosHandler: (query: string) => void
     modalCloseHandler: () => void
@@ -18,35 +19,29 @@ interface ISearchPageProps {
     loading: boolean
     setLoadingHandler: (value: boolean) => void
     activePhoto:Photo|null,
-    search: string
 }
 
-export const SearchPage: FC<ISearchPageProps> = ({searchPhotosHandler, infinitePhotoHandler, modalCloseHandler, imageClickHandler,
-                                                     showModal, loading, activePhoto, search}) => {
+export const CollectionPage: FC<ICollectionPageProps> = ({searchPhotosHandler, infinitePhotoHandler, modalCloseHandler, imageClickHandler,
+                                                     showModal, loading, activePhoto}) => {
 
-    const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
-    const {likes} = useSelector((state: RootState) => state.likes)
     const {collection} = useSelector((state: RootState) => state.collection)
+    const {likes} = useSelector((state: RootState) => state.likes)
     let content = null
     if (loading) {
         content = <Loader/>
     }else{
-         content = (
-            error
-                ?   <h1 className="search__header__title">{Error}</h1>
-                : <Fragment>
+         content = <Fragment>
                     <section className="search__header">
-                        <h1 className="search__header__title">{search}</h1>
+                        <h1 className="search__header__title">Collection</h1>
                     </section>
                     <div className={'search__grid'}>
-                        {photos.length > 0
+                        {collection.length > 0
                             ? <InfiniteScrollContainer imageClickHandler={imageClickHandler} loader={<Loader/>}
-                                                       photos={photos} hasMore={true} likes={likes} next={infinitePhotoHandler} collection={collection}/>
+                                                       photos={collection} hasMore={false} likes={likes} next={infinitePhotoHandler} isCollectionPage={true}/>
                             : <h1 className="search__header__title">No results</h1>
                         }
                     </div>
                 </Fragment>
-        )
     }
     return (
         <div className={'page-wrap'}>
@@ -55,6 +50,7 @@ export const SearchPage: FC<ISearchPageProps> = ({searchPhotosHandler, infiniteP
             <div className={'search'}>
                 {content}
             </div>
+            <Footer/>
             {activePhoto ?
                 showModal && <Modal isLiked={likes.indexOf(activePhoto.id) !== -1}
                                     isCollected={collection.findIndex((p)=>p.id===activePhoto.id)!==-1} onClose={modalCloseHandler} photo={activePhoto}/>

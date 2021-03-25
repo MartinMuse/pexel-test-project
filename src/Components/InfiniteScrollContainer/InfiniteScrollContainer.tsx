@@ -12,12 +12,14 @@ interface IInfiniteScrollContainerProps{
     hasMore: boolean
     loader: any
     imageClickHandler:(e: MouseEvent, photo: Photo)=>void,
-    likes:number[]
+    likes:number[],
+    isCollectionPage?:boolean,
+    collection?:Photo[]
 }
 
-export const InfiniteScrollContainer: FC<IInfiniteScrollContainerProps> = ({photos,next,hasMore,loader,imageClickHandler,likes}) => {
+export const InfiniteScrollContainer: FC<IInfiniteScrollContainerProps> = ({photos,next,hasMore,loader,imageClickHandler,likes,isCollectionPage=false,collection=[]},) => {
     return (
-        <InfiniteScroll dataLength={photos.length}
+        <InfiniteScroll dataLength={isCollectionPage? collection.length : photos.length}
                         next={next}
                         hasMore={hasMore}
                         loader={loader}>
@@ -25,9 +27,12 @@ export const InfiniteScrollContainer: FC<IInfiniteScrollContainerProps> = ({phot
                 <Masonry gutter={18} className={'photos'}>
                     {photos.map(photo => {
                         let isLiked=false
+                        let isCollected=false
                         if(likes.indexOf(photo.id)>-1)
                             isLiked=true
-                        return <PhotoItem photo={photo} imageClickHandler={imageClickHandler} isLiked={isLiked}/>}
+                        if(isCollectionPage || (collection?.findIndex((el)=>el.id===photo.id)>-1))
+                            isCollected=true
+                        return <PhotoItem photo={photo} imageClickHandler={imageClickHandler} isLiked={isLiked} isCollected={isCollected}/>}
                     )}
                 </Masonry>
             </ResponsiveMasonry>

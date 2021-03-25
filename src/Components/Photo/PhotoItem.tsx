@@ -5,22 +5,32 @@ import React, {FC, useState} from "react";
 import './PhotoItem.css'
 import {useDispatch} from "react-redux";
 import {deleteLike, setLike} from "../../Redux/actions/likesActions";
+import {deleteCollectionItem, setCollectionItem} from "../../Redux/actions/collectionActions";
 
 
 interface IPhotoItem {
     photo: Photo,
     imageClickHandler: (e: any, photo: Photo) => void,
-    isLiked: boolean
+    isLiked: boolean,
+    isCollected: boolean
 }
 
 
-export const PhotoItem: FC<IPhotoItem> = ({photo, imageClickHandler, isLiked}) => {
+export const PhotoItem: FC<IPhotoItem> = ({photo, imageClickHandler, isLiked, isCollected}) => {
     const dispatch = useDispatch()
-    const onClickHandler = () => {
+    const onClickLikeHandler = () => {
         if (isLiked) {
             dispatch(deleteLike(photo.id))
         } else {
             dispatch(setLike(photo.id))
+        }
+    }
+
+    const onClickCollectHandler = () => {
+        if (isCollected) {
+            dispatch(deleteCollectionItem(photo.id))
+        } else {
+            dispatch(setCollectionItem(photo))
         }
     }
 
@@ -38,7 +48,8 @@ export const PhotoItem: FC<IPhotoItem> = ({photo, imageClickHandler, isLiked}) =
                 <span className="masonry-item__name">{photo.photographer}</span>
             </a>
             <div className="masonry-item__info">
-                <a className="js-download js-download-6569318 rd__button rd__button--download rd__button--no-padding rd__button--text-white rd__button--with-icon" download=""
+                <a className="js-download js-download-6569318 rd__button rd__button--download rd__button--no-padding rd__button--text-white rd__button--with-icon"
+                   download=""
                    href={`https://www.pexels.com/photo/${photo.id}/download/`}>
                     <i className="rd__button--download--not-active--icon rd__svg-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100px" width="100px" fill="#000000"
@@ -54,17 +65,24 @@ export const PhotoItem: FC<IPhotoItem> = ({photo, imageClickHandler, isLiked}) =
                     </i>
                 </a>
                 <button
-                    className="js-collect rd__button rd__button--collect rd__button--no-padding rd__button--text-white rd__button--with-icon">
-                    <i className="rd__button--collect--not-active--icon rd__svg-icon">
+                    className="js-collect rd__button rd__button--collect rd__button--no-padding rd__button--text-white rd__button--with-icon"
+                    onClick={onClickCollectHandler}>
+                    <i className="rd__button--collect--not-active--icon rd__svg-icon" style={isCollected ? {display: 'none'} : {}}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path
                                 d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
                         </svg>
                     </i>
+                    <i className="rd__button--collect--active--icon rd__svg-icon" style={isCollected ? {} : {display: 'none'}}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                        </svg>
+                    </i>
                 </button>
                 <button
                     className={`js-like rd__button rd__button--like rd__button--no-padding rd__button--text-white rd__button--with-icon ${isLiked ? 'rd__button--like--active-tiny' : ''}`}
-                    onClick={() => onClickHandler()}>
+                    onClick={() => onClickLikeHandler()}>
                     <i className="rd__button--like--not-active--icon rd__svg-icon"
                        style={isLiked ? {display: 'none'} : {}}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
