@@ -175,7 +175,7 @@
   --color-search-bar-placeholder: #5e5e5e;
 }
 
-  ul.main-nav-bar__sub-nav {
+  .main-nav-bar__sub-nav {
     display: -webkit-box;
     display: flex;
     -webkit-box-align: center;
