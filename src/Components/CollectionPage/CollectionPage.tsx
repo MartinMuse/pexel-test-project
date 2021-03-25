@@ -47,7 +47,7 @@ export const CollectionPage: FC<ICollectionPageProps> = ({searchPhotosHandler, i
         <div className={'page-wrap'}>
             <Navbar onSearch={searchPhotosHandler} isAlwaysActive={true}/>
             <div className="main-nav-bar-padding"></div>
-            <div className={'search'}>
+            <div className={'collection'}>
                 {content}
             </div>
             <Footer/>

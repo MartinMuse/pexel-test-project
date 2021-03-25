@@ -1,5 +1,6 @@
-.search{
+.collection{
   margin-bottom: 12px;
+  min-height: 100vh;
 }
 .search__header {
   margin: auto;
