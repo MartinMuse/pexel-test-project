@@ -92,6 +92,12 @@ input {
   z-index: 1;
 }
 
+@media (max-width:549px) {
+  .search-bar__container button{
+    padding: 0 0.5rem!important;
+  }
+}
+
 input, button, select, textarea {
   font-family: inherit;
   font-size: inherit;
@@ -143,4 +149,3 @@ button {
   width: 25px;
   height: 25px;
 }
-
