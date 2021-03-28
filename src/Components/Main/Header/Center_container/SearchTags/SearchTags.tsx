@@ -15,12 +15,13 @@ const LIST_OF_TAGS = [
 ]
 
 interface ISearchTags{
-    onSearch:(q:string)=>void
+    onSearch:(q:string)=>void,
+    translate:(s:string)=>string
 }
 
 const MAX_SIZE = 7;
 
-export const SearchTags: FC<ISearchTags> = ({onSearch}) => {
+export const SearchTags: FC<ISearchTags> = ({onSearch,translate}) => {
 
     const randomElement = (arr: Array<string>): string => {
         const random = Math.floor(Math.random() * arr.length);
@@ -56,7 +57,7 @@ export const SearchTags: FC<ISearchTags> = ({onSearch}) => {
         <div className="hero__search-container__search-tags">
             <ul className="hero__search-container__search-tags__tag-container">
                 <li className="hero__search-container__search-tags__tag-container__suggested">
-                    Suggested<span>:</span></li>
+                    {translate("searchTagsTitle")}<span>:</span></li>
                 <li>
                     <ul>
                         {tagsList}

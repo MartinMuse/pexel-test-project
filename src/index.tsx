@@ -5,11 +5,18 @@ import App from './Components/App';
 import {Provider} from "react-redux";
 import store from "./Redux/store";
 import {BrowserRouter} from "react-router-dom";
+import {Suspense} from "react";
+import {Loader} from "./Components/Loader/Loader";
+import LangState from "./context/lang";
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
+       <Suspense fallback={<Loader/>}>
+           <BrowserRouter>
+               <LangState>
+                   <App/>
+               </LangState>
+           </BrowserRouter>
+       </Suspense>
     </Provider>,
     document.getElementById('root')
 );

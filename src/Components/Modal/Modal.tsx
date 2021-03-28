@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useContext, useEffect, useState} from "react";
 import "./Modal.css"
 import "./ModalMedia.css"
 import {ModalNavbar} from "./ModalNavBar/ModalNavbar";
@@ -7,6 +7,7 @@ import {deleteLike, setLike} from "../../Redux/actions/likesActions";
 import {useDispatch} from "react-redux";
 import {deleteCollectionItem, setCollectionItem} from "../../Redux/actions/collectionActions";
 import {Photo} from "pexels";
+import {LangContext} from "../../context/lang";
 
 interface IModalProps {
     onClose: () => void
@@ -16,6 +17,7 @@ interface IModalProps {
 }
 
 export const Modal: FC<IModalProps> = ({onClose,isLiked,isCollected,photo}) => {
+    const { dispatch: { translate }} = useContext(LangContext);
     const dispatch=useDispatch()
     const onClickLikeHandler = () => {
         if (isLiked) {
@@ -112,7 +114,7 @@ export const Modal: FC<IModalProps> = ({onClose,isLiked,isCollected,photo}) => {
                                                             d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
                                                     </svg>
                                                 </i>
-                                                <span>Collect</span>
+                                                <span>{translate('modalCollectionButton')}</span>
                                             </button>
 
                                             <div className="js-photo-page-action-buttons-download">
@@ -125,7 +127,7 @@ export const Modal: FC<IModalProps> = ({onClose,isLiked,isCollected,photo}) => {
                                                        download=""
                                                        href={`https://www.pexels.com/photo/${photo.id}/download/`}
                                                        rel="nofollow">
-                                                        <span>Free Download</span>
+                                                        <span>{translate("modalDownloadButton")}</span>
                                                     </a>
                                                 </div>
                                             </div>
@@ -149,7 +151,7 @@ export const Modal: FC<IModalProps> = ({onClose,isLiked,isCollected,photo}) => {
                                     </div>
                             </div>
                         </section>
-                        <PhotoDetailsSection authorName={photo.photographer} authorUrl={photo.photographer_url}/>
+                        <PhotoDetailsSection authorName={photo.photographer} authorUrl={photo.photographer_url} translate={translate}/>
                     </div>
                 </div>
             </div>

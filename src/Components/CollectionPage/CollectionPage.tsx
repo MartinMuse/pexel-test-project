@@ -1,4 +1,4 @@
-import React, {FC, Fragment, useState} from "react";
+import React, {FC, Fragment, useContext, useState} from "react";
 import {Navbar} from "../Navbar/Navbar";
 import {Modal} from "../Modal/Modal";
 import {Photo} from "pexels";
@@ -9,6 +9,7 @@ import {InfiniteScrollContainer} from "../InfiniteScrollContainer/InfiniteScroll
 import {useSelector} from "react-redux";
 import {RootState} from "../../Redux/store";
 import {Footer} from "../Footer/Footer";
+import {LangContext} from "../../context/lang";
 
 interface ICollectionPageProps {
     infinitePhotoHandler: () => void
@@ -23,7 +24,7 @@ interface ICollectionPageProps {
 
 export const CollectionPage: FC<ICollectionPageProps> = ({searchPhotosHandler, infinitePhotoHandler, modalCloseHandler, imageClickHandler,
                                                      showModal, loading, activePhoto}) => {
-
+    const { dispatch: { translate }} = useContext(LangContext);
     const {collection} = useSelector((state: RootState) => state.collection)
     const {likes} = useSelector((state: RootState) => state.likes)
     let content = null
@@ -32,13 +33,13 @@ export const CollectionPage: FC<ICollectionPageProps> = ({searchPhotosHandler, i
     }else{
          content = <Fragment>
                     <section className="search__header">
-                        <h1 className="search__header__title">Collection</h1>
+                        <h1 className="search__header__title">{translate("collectionPageTitle")}</h1>
                     </section>
                     <div className={'search__grid'}>
                         {collection.length > 0
                             ? <InfiniteScrollContainer imageClickHandler={imageClickHandler} loader={<Loader/>}
                                                        photos={collection} hasMore={false} likes={likes} next={infinitePhotoHandler} isCollectionPage={true}/>
-                            : <h1 className="search__header__title">Your collection is empty</h1>
+                            : <h1 className="search__header__title">{translate("collectionEmptyPageTitle")}</h1>
                         }
                     </div>
                 </Fragment>

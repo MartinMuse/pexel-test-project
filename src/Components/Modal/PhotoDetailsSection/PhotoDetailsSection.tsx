@@ -4,16 +4,17 @@ import './PhotoDetailsSection.css'
 interface IPhotoDetailsSectionProps{
     authorName:string,
     authorUrl: string,
+    translate:(s:string)=>string
 }
 
-export const PhotoDetailsSection:FC<IPhotoDetailsSectionProps>=({authorUrl,authorName})=>{
+export const PhotoDetailsSection:FC<IPhotoDetailsSectionProps>=({authorUrl,authorName,translate})=>{
     return (
         <section className="photo-page__section photo-page__section--photo-details">
             <div className="photo-page__photo-details-overview js-photo-page-photo-details">
                 <div className="photo-page__visible-on-mobile">
                     <div className="rd__card js-photo-page-photographer-card">
                         <div className="rd__card__title js-photo-page-photographer-card-title">
-                            Photographer
+                            {translate('modalPhotographerTitle')}
                         </div>
                         <div className="rd__card__section">
                             <a className="js-photo-page-photographer-card-link photo-page__mini-profile"

@@ -1,7 +1,8 @@
-import {FC, useState} from "react";
+import {FC, useContext, useState} from "react";
 import './Navbar.css'
 import {SearchBar} from "../SearchBar/SearchBar";
 import {NavLink} from "react-router-dom";
+import {LangContext} from "../../context/lang";
 
 interface INavbarProps {
     onSearch: (value: string) => void
@@ -9,6 +10,7 @@ interface INavbarProps {
 }
 
 export const Navbar: FC<INavbarProps> = ({onSearch, isAlwaysActive = false}) => {
+    const { dispatch: { translate }} = useContext(LangContext);
     const [navbar, setNavbar] = useState(isAlwaysActive?'active_nav':'')
     const [searchbar, setSearchbar] = useState(isAlwaysActive?'active_search':'none')
     const changeBackground = () => {
@@ -38,11 +40,11 @@ export const Navbar: FC<INavbarProps> = ({onSearch, isAlwaysActive = false}) => 
                 <div className="hide-when-mid-size-and-smaller main-nav-bar__logo__text">Pexels</div>
             </NavLink>
             <div className={'main-nav-bar__search-bar'}>
-                <SearchBar onSearch={onSearch} placeHolder={'Search for free photos'} activeClass={searchbar}/>
+                <SearchBar onSearch={onSearch} placeHolder={translate('navbarSearchbarPlaceholder')} activeClass={searchbar}/>
             </div>
             <NavLink className={'main-nav-bar__sub-nav'} to="/collection">
                 <li className="collection-button">
-                    <div className="main-nav-bar__sub-nav__item main-nav-bar__sub-nav__item--button">Collection</div>
+                    <div className="main-nav-bar__sub-nav__item main-nav-bar__sub-nav__item--button">{translate('collectionButton')}</div>
                 </li>
             </NavLink>
         </nav>)

@@ -1,6 +1,7 @@
 import './SearchBar.css'
-import {FormEvent, useState, FC} from "react";
+import {FormEvent, useState, FC, useContext} from "react";
 import {useHistory} from "react-router";
+import {LangContext} from "../../context/lang";
 
 interface ISearchBarProps {
     onSearch: (value: string) => void,
@@ -9,7 +10,8 @@ interface ISearchBarProps {
     extraClass?: string,
 }
 
-export const SearchBar: FC<ISearchBarProps> = ({onSearch, activeClass = '', placeHolder = 'Search for free photos and videos', extraClass = ''}) => {
+export const SearchBar: FC<ISearchBarProps> = ({onSearch, activeClass = '', placeHolder, extraClass = ''}) => {
+    const { dispatch: { translate }} = useContext(LangContext);
     const [search, setSearch] = useState('')
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();
@@ -20,7 +22,7 @@ export const SearchBar: FC<ISearchBarProps> = ({onSearch, activeClass = '', plac
         <form className={`search-bar`} onSubmit={submitHandler}>
             <div className={`search-bar__container ${activeClass}`}>
                 <input autoCapitalize="none" autoComplete="off" id="search" name="s"
-                       placeholder={placeHolder} required={true} type="search" value={search}
+                       placeholder={placeHolder?placeHolder:translate('mainSearchbarPlaceholder')} required={true} type="search" value={search}
                        onChange={(e) => {
                            setSearch(e.currentTarget.value)
                        }}

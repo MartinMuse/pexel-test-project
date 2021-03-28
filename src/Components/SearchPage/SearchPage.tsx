@@ -1,4 +1,4 @@
-import React, {FC, Fragment, useState} from "react";
+import React, {FC, Fragment, useContext, useState} from "react";
 import {Navbar} from "../Navbar/Navbar";
 import {Modal} from "../Modal/Modal";
 import {Photo} from "pexels";
@@ -8,6 +8,7 @@ import './SearchPage.css'
 import {InfiniteScrollContainer} from "../InfiniteScrollContainer/InfiniteScrollContainer";
 import {useSelector} from "react-redux";
 import {RootState} from "../../Redux/store";
+import {LangContext} from "../../context/lang";
 
 interface ISearchPageProps {
     infinitePhotoHandler: () => void
@@ -23,7 +24,7 @@ interface ISearchPageProps {
 
 export const SearchPage: FC<ISearchPageProps> = ({searchPhotosHandler, infinitePhotoHandler, modalCloseHandler, imageClickHandler,
                                                      showModal, loading, activePhoto, search}) => {
-
+    const { dispatch: { translate }} = useContext(LangContext);
     const {photos, total_results, error} = useSelector((state: RootState) => state.photos)
     const {likes} = useSelector((state: RootState) => state.likes)
     const {collection} = useSelector((state: RootState) => state.collection)
@@ -42,7 +43,7 @@ export const SearchPage: FC<ISearchPageProps> = ({searchPhotosHandler, infiniteP
                         {photos.length > 0
                             ? <InfiniteScrollContainer imageClickHandler={imageClickHandler} loader={<Loader/>}
                                                        photos={photos} hasMore={true} likes={likes} next={infinitePhotoHandler} collection={collection}/>
-                            : <h1 className="search__header__title">No results</h1>
+                            : <h1 className="search__header__title">{translate("noResultTitle")}</h1>
                         }
                     </div>
                 </Fragment>
