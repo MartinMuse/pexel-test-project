@@ -59,7 +59,7 @@ export const Navbar: FC<INavbarProps> = ({onSearch, isAlwaysActive = false}) => 
                     <div className="dropbtn main-nav-bar__sub-nav__item main-nav-bar__sub-nav__item--button">
                         {translate('Menu')}
                         <div className="dropdown-content">
-                            <NavLink to="/collection">{translate('collectionButton')}</NavLink>
+                            <NavLink className={"unselectable"} to="/collection">{translate('collectionButton')}</NavLink>
                             <a  onClick={()=>setLanguage('EN')}>EN</a>
                             <a  onClick={()=>setLanguage('RU')}>RU</a>
                         </div>
