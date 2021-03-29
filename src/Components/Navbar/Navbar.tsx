@@ -10,9 +10,9 @@ interface INavbarProps {
 }
 
 export const Navbar: FC<INavbarProps> = ({onSearch, isAlwaysActive = false}) => {
-    const { dispatch: { translate }} = useContext(LangContext);
-    const [navbar, setNavbar] = useState(isAlwaysActive?'active_nav':'')
-    const [searchbar, setSearchbar] = useState(isAlwaysActive?'active_search':'none')
+    const { state: { language}, dispatch: { setLanguage, translate } } = useContext(LangContext);
+    const [navbar, setNavbar] = useState(isAlwaysActive ? 'active_nav' : '')
+    const [searchbar, setSearchbar] = useState(isAlwaysActive ? 'active_search' : 'none')
     const changeBackground = () => {
         if (window.scrollY >= 130) {
             setNavbar('active_nav')
@@ -40,13 +40,41 @@ export const Navbar: FC<INavbarProps> = ({onSearch, isAlwaysActive = false}) => 
                 <div className="hide-when-mid-size-and-smaller main-nav-bar__logo__text">Pexels</div>
             </NavLink>
             <div className={'main-nav-bar__search-bar'}>
-                <SearchBar onSearch={onSearch} placeHolder={translate('navbarSearchbarPlaceholder')} activeClass={searchbar}/>
+                <SearchBar onSearch={onSearch} placeHolder={translate('navbarSearchbarPlaceholder')}
+                           activeClass={searchbar}/>
             </div>
-            <NavLink className={'main-nav-bar__sub-nav'} to="/collection">
-                <li className="collection-button">
-                    <div className="main-nav-bar__sub-nav__item main-nav-bar__sub-nav__item--button">{translate('collectionButton')}</div>
+            <ul className={'language-button-container'}>
+                <li className="language-button dropdown">
+                    <div className="dropbtn main-nav-bar__sub-nav__item main-nav-bar__sub-nav__item--button">
+                        {language}
+                        <div className="dropdown-content">
+                            <a  onClick={()=>setLanguage('EN')}>EN</a>
+                            <a  onClick={()=>setLanguage('RU')}>RU</a>
+                        </div>
+                    </div>
                 </li>
-            </NavLink>
+            </ul>
+            <ul className={'menu-button-container'} style={{display:"none"}}>
+                <li className="menu-button dropdown">
+                    <div className="dropbtn main-nav-bar__sub-nav__item main-nav-bar__sub-nav__item--button">
+                        {translate('Menu')}
+                        <div className="dropdown-content">
+                            <NavLink to="/collection">{translate('collectionButton')}</NavLink>
+                            <a  onClick={()=>setLanguage('EN')}>EN</a>
+                            <a  onClick={()=>setLanguage('RU')}>RU</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul className={'collection-button-container'}>
+                <NavLink to="/collection">
+                    <li className="collection-button">
+                        <div
+                            className="main-nav-bar__sub-nav__item main-nav-bar__sub-nav__item--button">{translate('collectionButton')}</div>
+                    </li>
+                </NavLink>
+            </ul>
+
         </nav>)
 
 }

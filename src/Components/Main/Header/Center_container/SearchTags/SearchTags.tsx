@@ -51,7 +51,7 @@ export const SearchTags: FC<ISearchTags> = ({onSearch,translate}) => {
         return result
     }
 
-    const tagsList = createTagsList()
+    let tagsList = createTagsList()
 
     return (
         <div className="hero__search-container__search-tags">
